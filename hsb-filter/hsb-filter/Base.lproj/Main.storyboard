@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,25 +12,25 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HSB_Filter_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-pt-Nn4" userLabel="Bottom Nav">
-                                <rect key="frame" x="0.0" y="1166" width="1024" height="200"/>
+                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
-                                        <rect key="frame" x="256" y="0.0" width="512" height="200"/>
+                                        <rect key="frame" x="94" y="0.0" width="187.5" height="200"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider">
-                                                <rect key="frame" x="18" y="35" width="476" height="31"/>
+                                                <rect key="frame" x="18" y="35" width="151.5" height="31"/>
                                                 <color key="thumbTintColor" red="0.45882352941176469" green="0.98431372549019602" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider">
-                                                <rect key="frame" x="18" y="85" width="476" height="31"/>
+                                                <rect key="frame" x="18" y="85" width="151.5" height="31"/>
                                                 <color key="thumbTintColor" red="0.73725490196078436" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider">
-                                                <rect key="frame" x="18" y="135" width="476" height="31"/>
+                                                <rect key="frame" x="18" y="135" width="151.5" height="31"/>
                                                 <color key="thumbTintColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             </slider>
                                         </subviews>
@@ -65,6 +65,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="brightnessSlider" destination="8At-WI-jJA" id="6I1-ig-mZQ"/>
+                        <outlet property="hueSlider" destination="dRj-4B-aqP" id="akJ-yy-irF"/>
+                        <outlet property="saturationSlider" destination="jQc-Xi-uc9" id="UTM-jd-qqo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

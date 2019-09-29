@@ -14,7 +14,7 @@ import UIKit
  * Used for setting the background gradient texture for UISlider
  * components.
  */
-struct GradientValue {
+public struct GradientValue {
     let color: UIColor
     let position: Float
 }
@@ -31,10 +31,10 @@ extension UISlider {
     /**
      * Sets the background gradient provided a list of gradients and a height value for the slider
      */
-    func setBackgroundGradient(gradients: [GradientValue], height:CGFloat) {
+    public func setBackgroundGradient(gradients: [GradientValue], height:CGFloat) {
         let gradientLayer = gradients.gradientLayer
         
-        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.width, height: height)
+        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.size.width, height: height)
 
         UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, false, 0.0)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
@@ -53,12 +53,12 @@ extension UISlider {
  */
 extension Array where Element == GradientValue {
     
-    var colorList:[UIColor] {
+    var colorList:[CGColor] {
         get {
-            var colors = [UIColor]()
+            var colors = [CGColor]()
             
             for gValue in self {
-                colors.append(gValue.color)
+                colors.append(gValue.color.cgColor)
             }
             
             return colors
@@ -88,9 +88,9 @@ extension Array where Element == GradientValue {
             
             gradientLayer.locations = self.colorPositionList
             gradientLayer.colors = self.colorList
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-            gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+            gradientLayer.cornerRadius = 1.25;
             
             return gradientLayer
         }
