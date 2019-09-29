@@ -35,10 +35,11 @@
 		632E74CB2340A9CA00D5DE53 /* SF-UI-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 632E74BD2340A9CA00D5DE53 /* SF-UI-Text-Medium.otf */; };
 		632E74CC2340A9CA00D5DE53 /* SF-UI-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 632E74BE2340A9CA00D5DE53 /* SF-UI-Text-Light.otf */; };
 		632E74CF2340AA2B00D5DE53 /* Neon-Source.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74CE2340AA2B00D5DE53 /* Neon-Source.png */; };
+		632E74D12340B14600D5DE53 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74D02340B14600D5DE53 /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		632E748B2340676E00D5DE53 /* hsb-filter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hsb-filter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		632E748B2340676E00D5DE53 /* HSB Filter Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HSB Filter Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		632E748E2340676E00D5DE53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		632E74902340676E00D5DE53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		632E74922340676E00D5DE53 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		632E74BD2340A9CA00D5DE53 /* SF-UI-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Medium.otf"; sourceTree = "<group>"; };
 		632E74BE2340A9CA00D5DE53 /* SF-UI-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Light.otf"; sourceTree = "<group>"; };
 		632E74CE2340AA2B00D5DE53 /* Neon-Source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Neon-Source.png"; sourceTree = "<group>"; };
+		632E74D02340B14600D5DE53 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +96,7 @@
 		632E748C2340676E00D5DE53 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				632E748B2340676E00D5DE53 /* hsb-filter.app */,
+				632E748B2340676E00D5DE53 /* HSB Filter Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +146,7 @@
 		632E74CD2340AA1D00D5DE53 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				632E74D02340B14600D5DE53 /* Icon.png */,
 				632E74CE2340AA2B00D5DE53 /* Neon-Source.png */,
 			);
 			path = Images;
@@ -166,7 +169,7 @@
 			);
 			name = "hsb-filter";
 			productName = "hsb-filter";
-			productReference = 632E748B2340676E00D5DE53 /* hsb-filter.app */;
+			productReference = 632E748B2340676E00D5DE53 /* HSB Filter Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -207,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632E74D12340B14600D5DE53 /* Icon.png in Resources */,
 				632E74AC2340A9BA00D5DE53 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				632E74AD2340A9BA00D5DE53 /* SF-UI-Text-Bold.otf in Resources */,
 				632E74CB2340A9CA00D5DE53 /* SF-UI-Text-Medium.otf in Resources */,
@@ -396,7 +400,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.david.hsb-filter";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "HSB Filter Demo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,7 +418,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.david.hsb-filter";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "HSB Filter Demo";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
