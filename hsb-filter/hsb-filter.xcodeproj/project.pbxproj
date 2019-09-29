@@ -36,6 +36,7 @@
 		632E74CC2340A9CA00D5DE53 /* SF-UI-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 632E74BE2340A9CA00D5DE53 /* SF-UI-Text-Light.otf */; };
 		632E74CF2340AA2B00D5DE53 /* Neon-Source.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74CE2340AA2B00D5DE53 /* Neon-Source.png */; };
 		632E74D12340B14600D5DE53 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74D02340B14600D5DE53 /* Icon.png */; };
+		632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E74D32340CC4E00D5DE53 /* GradientExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		632E74BE2340A9CA00D5DE53 /* SF-UI-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Light.otf"; sourceTree = "<group>"; };
 		632E74CE2340AA2B00D5DE53 /* Neon-Source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Neon-Source.png"; sourceTree = "<group>"; };
 		632E74D02340B14600D5DE53 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		632E74D32340CC4E00D5DE53 /* GradientExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		632E748D2340676E00D5DE53 /* hsb-filter */ = {
 			isa = PBXGroup;
 			children = (
+				632E74D22340CC3500D5DE53 /* Sliders */,
 				632E748E2340676E00D5DE53 /* AppDelegate.swift */,
 				632E74902340676E00D5DE53 /* SceneDelegate.swift */,
 				632E74922340676E00D5DE53 /* ViewController.swift */,
@@ -150,6 +153,14 @@
 				632E74CE2340AA2B00D5DE53 /* Neon-Source.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		632E74D22340CC3500D5DE53 /* Sliders */ = {
+			isa = PBXGroup;
+			children = (
+				632E74D32340CC4E00D5DE53 /* GradientExt.swift */,
+			);
+			path = Sliders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				632E74932340676E00D5DE53 /* ViewController.swift in Sources */,
+				632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */,
 				632E748F2340676E00D5DE53 /* AppDelegate.swift in Sources */,
 				632E74912340676E00D5DE53 /* SceneDelegate.swift in Sources */,
 			);
