@@ -34,15 +34,17 @@ extension UISlider {
     public func setBackgroundGradient(gradients: [GradientValue], height:CGFloat) {
         let gradientLayer = gradients.gradientLayer
         
-        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.size.width, height: height)
+        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: height)
 
         UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, false, 0.0)
         gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        let sretchedImage = image?.stretchableImage(withLeftCapWidth: 14, topCapHeight: 0)
 
-        self.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
-        self.setMinimumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
+        self.setMinimumTrackImage(sretchedImage, for: .normal)
+        self.setMaximumTrackImage(sretchedImage, for: .normal)
     }
 }
 
@@ -88,8 +90,8 @@ extension Array where Element == GradientValue {
             
             gradientLayer.locations = self.colorPositionList
             gradientLayer.colors = self.colorList
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
             gradientLayer.cornerRadius = 1.25;
             
             return gradientLayer
