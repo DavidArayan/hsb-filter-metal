@@ -27,8 +27,22 @@ struct GradientValue {
  * We could also just extend the UISlider with a base class
  */
 extension UISlider {
-    func setBackgroundGradient(gradients: [GradientValue]) {
-        // to-do
+    
+    /**
+     * Sets the background gradient provided a list of gradients and a height value for the slider
+     */
+    func setBackgroundGradient(gradients: [GradientValue], height:CGFloat) {
+        let gradientLayer = gradients.gradientLayer
+        
+        gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.width, height: height)
+
+        UIGraphicsBeginImageContextWithOptions(gradientLayer.frame.size, false, 0.0)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        self.setMaximumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
+        self.setMinimumTrackImage(image?.resizableImage(withCapInsets:.zero),  for: .normal)
     }
 }
 
@@ -51,15 +65,34 @@ extension Array where Element == GradientValue {
         }
     }
     
-    var colorPositionList:[Float] {
+    var colorPositionList:[NSNumber] {
         get {
-            var positions = [Float]()
+            var positions = [NSNumber]()
             
             for gValue in self {
-                positions.append(gValue.position)
+                positions.append(NSNumber(value: gValue.position))
             }
             
             return positions
+        }
+    }
+    
+    /**
+     * Simple helper function that generates a CAGradientLayer from the current array of
+     * GradientValue types. Should be a simple case of plug and play with the UISlider
+     * component.
+     */
+    var gradientLayer:CAGradientLayer {
+        get {
+            let gradientLayer = CAGradientLayer()
+            
+            gradientLayer.locations = self.colorPositionList
+            gradientLayer.colors = self.colorList
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+            gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+            
+            return gradientLayer
         }
     }
 }
