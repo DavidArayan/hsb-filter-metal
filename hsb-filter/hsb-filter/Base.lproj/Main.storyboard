@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Display-Regular.otf">
+            <string>SFUIDisplay-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -23,28 +28,52 @@
                                 <rect key="frame" x="0.0" y="838" width="1366" height="186"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
-                                        <rect key="frame" x="398.5" y="0.0" width="569" height="186"/>
+                                        <rect key="frame" x="358" y="0.0" width="650" height="186"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider">
-                                                <rect key="frame" x="-17" y="28" width="533" height="31"/>
+                                                <rect key="frame" x="18" y="28" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Hue 50"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider">
-                                                <rect key="frame" x="-17" y="78" width="533" height="31"/>
+                                                <rect key="frame" x="18" y="78" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Saturation 50"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider">
-                                                <rect key="frame" x="-17" y="128" width="533" height="31"/>
+                                                <rect key="frame" x="18" y="128" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Brightness 50"/>
                                             </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="W1L-Hc-z9O" userLabel="Hue Label">
+                                                <rect key="frame" x="650" y="32.5" width="30.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <color key="textColor" name="Active Text Color"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Saturation Label">
+                                                <rect key="frame" x="650" y="82.5" width="75.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <color key="textColor" name="Active Text Color"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Brightness Label">
+                                                <rect key="frame" x="650" y="132.5" width="79" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <color key="textColor" name="Active Text Color"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="W1L-Hc-z9O" firstAttribute="leading" secondItem="dRj-4B-aqP" secondAttribute="trailing" constant="20" id="2vk-Vs-8FP"/>
                                             <constraint firstItem="jQc-Xi-uc9" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="9Pi-Ue-W8o"/>
-                                            <constraint firstItem="8At-WI-jJA" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" constant="-35" id="ANU-De-RcA"/>
-                                            <constraint firstItem="dRj-4B-aqP" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" constant="-35" id="JPh-Tt-ghb"/>
-                                            <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" constant="-35" id="NZH-xc-4bl"/>
+                                            <constraint firstItem="xsr-s2-eft" firstAttribute="leading" secondItem="8At-WI-jJA" secondAttribute="trailing" constant="20" id="A25-PX-Oy5"/>
+                                            <constraint firstItem="8At-WI-jJA" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="ANU-De-RcA"/>
+                                            <constraint firstItem="dRj-4B-aqP" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="JPh-Tt-ghb"/>
+                                            <constraint firstItem="pRG-nj-3IN" firstAttribute="centerY" secondItem="jQc-Xi-uc9" secondAttribute="centerY" id="MXc-mb-4NA"/>
+                                            <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="NZH-xc-4bl"/>
                                             <constraint firstItem="8At-WI-jJA" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="Prv-Vh-uWE"/>
+                                            <constraint firstItem="W1L-Hc-z9O" firstAttribute="centerY" secondItem="dRj-4B-aqP" secondAttribute="centerY" id="SEm-rK-zya"/>
+                                            <constraint firstItem="xsr-s2-eft" firstAttribute="centerY" secondItem="8At-WI-jJA" secondAttribute="centerY" id="SyM-rd-naX"/>
                                             <constraint firstItem="dRj-4B-aqP" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="ZuG-Gt-FVd"/>
+                                            <constraint firstItem="pRG-nj-3IN" firstAttribute="leading" secondItem="jQc-Xi-uc9" secondAttribute="trailing" constant="20" id="dBr-kj-Xke"/>
                                             <constraint firstItem="dRj-4B-aqP" firstAttribute="bottom" secondItem="jQc-Xi-uc9" secondAttribute="top" constant="-20" id="hem-Pn-dNS"/>
                                             <constraint firstItem="8At-WI-jJA" firstAttribute="top" secondItem="jQc-Xi-uc9" secondAttribute="bottom" constant="20" id="kkD-O5-zdD"/>
                                             <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerY" secondItem="m0v-SS-k1g" secondAttribute="centerY" id="tEz-IN-Yae"/>
@@ -54,7 +83,7 @@
                                 <color key="backgroundColor" name="Bottom Nav"/>
                                 <constraints>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="centerX" secondItem="Ma0-pt-Nn4" secondAttribute="centerX" id="3w7-1U-Uch"/>
-                                    <constraint firstItem="m0v-SS-k1g" firstAttribute="width" secondItem="Ma0-pt-Nn4" secondAttribute="width" multiplier="1:2.4" id="KBX-hz-fV2"/>
+                                    <constraint firstItem="m0v-SS-k1g" firstAttribute="width" secondItem="Ma0-pt-Nn4" secondAttribute="width" multiplier="1:2.1" id="KBX-hz-fV2"/>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" id="S3m-vB-Zbp"/>
                                     <constraint firstAttribute="bottom" secondItem="m0v-SS-k1g" secondAttribute="bottom" id="qlV-BT-jiv"/>
                                 </constraints>
@@ -68,7 +97,7 @@
                             <constraint firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="HWR-fb-byz"/>
                             <constraint firstItem="Ccb-7u-NrK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="dE0-nE-JUT"/>
                             <constraint firstItem="Ccb-7u-NrK" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="hWc-L8-FLz"/>
-                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="height" secondItem="Ccb-7u-NrK" secondAttribute="height" multiplier="1:5.5" id="uir-3r-zl1"/>
+                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:5.5" id="uir-3r-zl1"/>
                             <constraint firstItem="Ccb-7u-NrK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wkX-fc-LCE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jqk-Xi-0nT"/>
@@ -81,11 +110,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="119"/>
+            <point key="canvasLocation" x="138.79941434846265" y="118.94531249999999"/>
         </scene>
     </scenes>
     <resources>
         <image name="Neon-Source.png" width="2732" height="2048"/>
+        <namedColor name="Active Text Color">
+            <color red="0.65490196078431373" green="0.6588235294117647" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Bottom Nav">
             <color red="0.093999996781349182" green="0.093999996781349182" blue="0.093999996781349182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
