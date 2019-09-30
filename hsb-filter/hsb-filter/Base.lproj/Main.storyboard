@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="ipad12_9" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,26 +12,29 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HSB_Filter_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Neon-Source.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ccb-7u-NrK" userLabel="Sample Image">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-pt-Nn4" userLabel="Bottom Nav">
-                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="824" width="1366" height="200"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
-                                        <rect key="frame" x="94" y="0.0" width="187.5" height="200"/>
+                                        <rect key="frame" x="341.5" y="0.0" width="683" height="200"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider">
-                                                <rect key="frame" x="18" y="35" width="151.5" height="31"/>
-                                                <color key="thumbTintColor" red="0.45882352941176469" green="0.98431372549019602" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="18" y="35" width="647" height="31"/>
+                                                <color key="thumbTintColor" name="Hue 50"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider">
-                                                <rect key="frame" x="18" y="85" width="151.5" height="31"/>
-                                                <color key="thumbTintColor" red="0.73725490196078436" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="18" y="85" width="647" height="31"/>
+                                                <color key="thumbTintColor" name="Saturation 50"/>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider">
-                                                <rect key="frame" x="18" y="135" width="151.5" height="31"/>
-                                                <color key="thumbTintColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="18" y="135" width="647" height="31"/>
+                                                <color key="thumbTintColor" name="Brightness 50"/>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -47,7 +50,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="Bottom Nav"/>
                                 <constraints>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="centerX" secondItem="Ma0-pt-Nn4" secondAttribute="centerX" id="3w7-1U-Uch"/>
                                     <constraint firstAttribute="height" constant="200" id="Bph-2H-Dr4"/>
@@ -59,11 +62,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="56Q-oy-6dI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ma0-pt-Nn4" secondAttribute="trailing" id="CZR-ue-gUQ"/>
-                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HWR-fb-byz"/>
+                            <constraint firstItem="Ccb-7u-NrK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="07w-ft-CfB"/>
+                            <constraint firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="56Q-oy-6dI"/>
+                            <constraint firstAttribute="trailing" secondItem="Ma0-pt-Nn4" secondAttribute="trailing" id="CZR-ue-gUQ"/>
+                            <constraint firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="HWR-fb-byz"/>
+                            <constraint firstItem="Ccb-7u-NrK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="dE0-nE-JUT"/>
+                            <constraint firstItem="Ccb-7u-NrK" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="hWc-L8-FLz"/>
+                            <constraint firstItem="Ccb-7u-NrK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wkX-fc-LCE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="brightnessSlider" destination="8At-WI-jJA" id="6I1-ig-mZQ"/>
@@ -76,4 +82,19 @@
             <point key="canvasLocation" x="139" y="119"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Neon-Source.png" width="2732" height="2048"/>
+        <namedColor name="Bottom Nav">
+            <color red="0.093999996781349182" green="0.093999996781349182" blue="0.093999996781349182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Brightness 50">
+            <color red="0.50199997425079346" green="0.49799999594688416" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Hue 50">
+            <color red="0.45899999141693115" green="0.98400002717971802" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Saturation 50">
+            <color red="0.7369999885559082" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
