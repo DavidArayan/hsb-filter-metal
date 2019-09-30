@@ -22,7 +22,7 @@ class GradientSlider: UISlider {
     }
     
     /**
-     * Handle smooth transition
+     * Handle smooth transition when the user moves the handle left to right
      */
     @objc func panGesture(gesture:UIPanGestureRecognizer) {
         let currentPoint = gesture.location(in: self)
@@ -32,9 +32,7 @@ class GradientSlider: UISlider {
 
         self.setValue(value, animated: true)
         
-        if (self.gradients != nil) {
-            self.thumbTintColor = gradients?.colorAt(position: value)
-        }
+        updateThumbTintColor()
     }
     
     /**
@@ -55,5 +53,20 @@ class GradientSlider: UISlider {
 
         self.setMinimumTrackImage(stretchedImage, for: .normal)
         self.setMaximumTrackImage(stretchedImage, for: .normal)
+    }
+    
+    /**
+     * Resets back to the original value of 0.5
+     */
+    public func reset() {
+        self.setValue(0.5, animated: true)
+        
+        updateThumbTintColor()
+    }
+    
+    private func updateThumbTintColor() {
+        if (self.gradients != nil) {
+            self.thumbTintColor = gradients?.colorAt(position: self.value)
+        }
     }
 }
