@@ -37,6 +37,7 @@
 		632E74CF2340AA2B00D5DE53 /* Neon-Source.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74CE2340AA2B00D5DE53 /* Neon-Source.png */; };
 		632E74D12340B14600D5DE53 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74D02340B14600D5DE53 /* Icon.png */; };
 		632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E74D32340CC4E00D5DE53 /* GradientExt.swift */; };
+		6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344D65F23420A8400FECFBE /* GradientSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		632E74CE2340AA2B00D5DE53 /* Neon-Source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Neon-Source.png"; sourceTree = "<group>"; };
 		632E74D02340B14600D5DE53 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		632E74D32340CC4E00D5DE53 /* GradientExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExt.swift; sourceTree = "<group>"; };
+		6344D65F23420A8400FECFBE /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				632E74D32340CC4E00D5DE53 /* GradientExt.swift */,
+				6344D65F23420A8400FECFBE /* GradientSlider.swift */,
 			);
 			path = Sliders;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */,
 				632E748F2340676E00D5DE53 /* AppDelegate.swift in Sources */,
 				632E74912340676E00D5DE53 /* SceneDelegate.swift in Sources */,
+				6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

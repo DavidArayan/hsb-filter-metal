@@ -9,15 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var hueSlider: UISlider!
-    @IBOutlet weak var saturationSlider: UISlider!
-    @IBOutlet weak var brightnessSlider: UISlider!
+    @IBOutlet weak var hueSlider: GradientSlider!
+    @IBOutlet weak var saturationSlider: GradientSlider!
+    @IBOutlet weak var brightnessSlider: GradientSlider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         // NOTE: This is done for the purposes of simplicity. In a real implementation
         // this would likely be its own construct/class to ensure positions are always mapped

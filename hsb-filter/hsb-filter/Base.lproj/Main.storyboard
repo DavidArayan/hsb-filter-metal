@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -30,32 +30,32 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
                                         <rect key="frame" x="358" y="0.0" width="650" height="186"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
                                                 <rect key="frame" x="18" y="28" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Hue 50"/>
                                             </slider>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
                                                 <rect key="frame" x="18" y="78" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Saturation 50"/>
                                             </slider>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
                                                 <rect key="frame" x="18" y="128" width="614" height="31"/>
                                                 <color key="thumbTintColor" name="Brightness 50"/>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="W1L-Hc-z9O" userLabel="Hue Label">
-                                                <rect key="frame" x="650" y="32.5" width="30.5" height="20.5"/>
+                                                <rect key="frame" x="650" y="33" width="30.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Saturation Label">
-                                                <rect key="frame" x="650" y="82.5" width="75.5" height="20.5"/>
+                                                <rect key="frame" x="650" y="83" width="75.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Brightness Label">
-                                                <rect key="frame" x="650" y="132.5" width="79" height="20.5"/>
+                                                <rect key="frame" x="650" y="133" width="79" height="20"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
@@ -66,15 +66,18 @@
                                             <constraint firstItem="jQc-Xi-uc9" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="9Pi-Ue-W8o"/>
                                             <constraint firstItem="xsr-s2-eft" firstAttribute="leading" secondItem="8At-WI-jJA" secondAttribute="trailing" constant="20" id="A25-PX-Oy5"/>
                                             <constraint firstItem="8At-WI-jJA" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="ANU-De-RcA"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pRG-nj-3IN" secondAttribute="trailing" constant="-75.5" id="IEb-ch-a1O"/>
                                             <constraint firstItem="dRj-4B-aqP" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="JPh-Tt-ghb"/>
                                             <constraint firstItem="pRG-nj-3IN" firstAttribute="centerY" secondItem="jQc-Xi-uc9" secondAttribute="centerY" id="MXc-mb-4NA"/>
                                             <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="NZH-xc-4bl"/>
                                             <constraint firstItem="8At-WI-jJA" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="Prv-Vh-uWE"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xsr-s2-eft" secondAttribute="trailing" constant="-79" id="Q8N-0e-JKa"/>
                                             <constraint firstItem="W1L-Hc-z9O" firstAttribute="centerY" secondItem="dRj-4B-aqP" secondAttribute="centerY" id="SEm-rK-zya"/>
                                             <constraint firstItem="xsr-s2-eft" firstAttribute="centerY" secondItem="8At-WI-jJA" secondAttribute="centerY" id="SyM-rd-naX"/>
                                             <constraint firstItem="dRj-4B-aqP" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="ZuG-Gt-FVd"/>
                                             <constraint firstItem="pRG-nj-3IN" firstAttribute="leading" secondItem="jQc-Xi-uc9" secondAttribute="trailing" constant="20" id="dBr-kj-Xke"/>
                                             <constraint firstItem="dRj-4B-aqP" firstAttribute="bottom" secondItem="jQc-Xi-uc9" secondAttribute="top" constant="-20" id="hem-Pn-dNS"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W1L-Hc-z9O" secondAttribute="trailing" constant="-30.5" id="hn3-0s-fdj"/>
                                             <constraint firstItem="8At-WI-jJA" firstAttribute="top" secondItem="jQc-Xi-uc9" secondAttribute="bottom" constant="20" id="kkD-O5-zdD"/>
                                             <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerY" secondItem="m0v-SS-k1g" secondAttribute="centerY" id="tEz-IN-Yae"/>
                                         </constraints>
@@ -103,9 +106,9 @@
                         <viewLayoutGuide key="safeArea" id="Jqk-Xi-0nT"/>
                     </view>
                     <connections>
-                        <outlet property="brightnessSlider" destination="8At-WI-jJA" id="6I1-ig-mZQ"/>
-                        <outlet property="hueSlider" destination="dRj-4B-aqP" id="akJ-yy-irF"/>
-                        <outlet property="saturationSlider" destination="jQc-Xi-uc9" id="UTM-jd-qqo"/>
+                        <outlet property="brightnessSlider" destination="8At-WI-jJA" id="qXj-RB-vvD"/>
+                        <outlet property="hueSlider" destination="dRj-4B-aqP" id="dnO-Zk-tim"/>
+                        <outlet property="saturationSlider" destination="jQc-Xi-uc9" id="MVs-f9-UPP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
