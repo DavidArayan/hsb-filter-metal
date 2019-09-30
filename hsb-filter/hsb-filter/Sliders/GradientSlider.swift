@@ -31,6 +31,10 @@ class GradientSlider: UISlider {
         let value = self.minimumValue + delta
 
         self.setValue(value, animated: true)
+        
+        if (self.gradients != nil) {
+            self.thumbTintColor = gradients?.colorAt(position: value)
+        }
     }
     
     /**
