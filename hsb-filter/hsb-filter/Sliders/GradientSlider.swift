@@ -31,6 +31,13 @@ class GradientSlider: UISlider {
      * Handle smooth transition when the user moves the handle left to right
      */
     @objc func panGesture(gesture:UIPanGestureRecognizer) {
+        // in here we will also grow/shrink the thumb image
+        // using a timed animation sequence, one for up and
+        // another for down
+        
+        // TO-DO
+        
+        // perform the smooth transition
         let currentPoint = gesture.location(in: self)
         let percentage = currentPoint.x / self.bounds.size.width;
         let delta = Float(percentage) * (self.maximumValue - self.minimumValue)
