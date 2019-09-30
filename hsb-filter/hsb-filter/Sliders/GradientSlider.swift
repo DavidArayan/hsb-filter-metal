@@ -11,10 +11,33 @@ import UIKit
 
 class GradientSlider: UISlider {
     
+    // we save this so we can use color interpolation for the handler
+    // see GradientExt for the extension functions
+    var gradients:[GradientValue]? = nil
+    
+    required init? (coder: NSCoder) {
+        super.init(coder: coder)
+        let panGesture = UIPanGestureRecognizer(target: self, action:#selector(panGesture(gesture:)))
+        self.addGestureRecognizer(panGesture)
+    }
+    
+    /**
+     * Handle smooth transition
+     */
+    @objc func panGesture(gesture:UIPanGestureRecognizer) {
+        let currentPoint = gesture.location(in: self)
+        let percentage = currentPoint.x / self.bounds.size.width;
+        let delta = Float(percentage) * (self.maximumValue - self.minimumValue)
+        let value = self.minimumValue + delta
+
+        self.setValue(value, animated: true)
+    }
+    
     /**
      * Sets the background gradient provided a list of gradients and a height value for the slider
      */
     public func setBackgroundGradient(gradients: [GradientValue], height:CGFloat) {
+        self.gradients = gradients
         let gradientLayer = gradients.gradientLayer
         
         gradientLayer.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: height)
@@ -24,9 +47,9 @@ class GradientSlider: UISlider {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let sretchedImage = image?.stretchableImage(withLeftCapWidth: 14, topCapHeight: 0)
+        let stretchedImage = image?.stretchableImage(withLeftCapWidth: 14, topCapHeight: 0)
 
-        self.setMinimumTrackImage(sretchedImage, for: .normal)
-        self.setMaximumTrackImage(sretchedImage, for: .normal)
+        self.setMinimumTrackImage(stretchedImage, for: .normal)
+        self.setMaximumTrackImage(stretchedImage, for: .normal)
     }
 }
