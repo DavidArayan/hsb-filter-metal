@@ -49,9 +49,9 @@ class ViewController: UIViewController {
             GradientValue(color: UIColor(named: "Brightness 100")!, position: 1.0)
         ]
          
-        hueSlider.setBackgroundGradient(gradients: hueGradients, height: 2.0)
-        saturationSlider.setBackgroundGradient(gradients: satGradients, height: 2.0)
-        brightnessSlider.setBackgroundGradient(gradients: briGradients, height: 2.0)
+        hueSlider.setBackgroundGradient(gradients: hueGradients, height: 3.0)
+        saturationSlider.setBackgroundGradient(gradients: satGradients, height: 3.0)
+        brightnessSlider.setBackgroundGradient(gradients: briGradients, height: 3.0)
     }
 }
 
