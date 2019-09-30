@@ -17,8 +17,14 @@ class GradientSlider: UISlider {
     
     required init? (coder: NSCoder) {
         super.init(coder: coder)
-        let panGesture = UIPanGestureRecognizer(target: self, action:#selector(panGesture(gesture:)))
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gesture:)))
         self.addGestureRecognizer(panGesture)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture(gesture:)))
+        
+        self.addGestureRecognizer(tapGestureRecognizer)
+        
     }
     
     /**
@@ -31,6 +37,25 @@ class GradientSlider: UISlider {
         let value = self.minimumValue + delta
 
         self.setValue(value, animated: true)
+        
+        updateThumbTintColor()
+    }
+    
+    /**
+     * Used for animating the thumb graphic up or down
+     */
+    @objc func tapGesture(gesture:UITapGestureRecognizer) {
+        let slider: UISlider? = gesture.view as? UISlider
+        
+        if (slider?.isHighlighted)! {
+            return
+        }
+
+        let pt: CGPoint = gesture.location(in: slider)
+        let percentage = pt.x / (slider?.frame.size.width)!
+        let delta = Float(percentage) * Float((slider?.maximumValue)! - (slider?.minimumValue)!)
+        let value = (slider?.minimumValue)! + delta
+        slider?.setValue(Float(value), animated: true)
         
         updateThumbTintColor()
     }
