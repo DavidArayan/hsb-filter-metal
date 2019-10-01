@@ -13,8 +13,8 @@ class GradientSlider: UISlider {
     
     // constant values for the thumb min and max size
     let trackHeight:CGFloat = 3
-    let thumbMinSize:CGFloat = 0.5
-    let thumbMaxSize:CGFloat = 2.0
+    let thumbMinSize:CGFloat = 5.0
+    let thumbMaxSize:CGFloat = 30.0
     
     // we save this so we can use color interpolation for the handler
     // see GradientExt for the extension functions
@@ -127,7 +127,42 @@ class GradientSlider: UISlider {
                                         outMin:0.0,
                                         outMax:1.0)
             
-            self.thumbTintColor = gradients?.colorAt(position: mappedValue)
+            let thumbColor:UIColor = gradients!.colorAt(position: mappedValue)
+            
+            // if this is not set, things go crazy... i don't know why
+            self.thumbTintColor = thumbColor
+            
+            // set the custom size/color of the thumb
+            setSliderThumbTintColor(color:thumbColor)
         }
+    }
+    
+    func setSliderThumbTintColor(color: UIColor) {
+        let circleImage:UIImage = makeCircleWith(size: CGSize(width: thumbMaxSize, height: thumbMaxSize),
+                       backgroundColor: color)
+        
+        self.setThumbImage(circleImage, for: .normal)
+        self.setThumbImage(circleImage, for: .highlighted)
+    }
+    
+    /**
+     * rather than redrawing the circles, we could pre-generate them and animate them
+     * using an array. Would still need to change their color though
+     */
+    fileprivate func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(backgroundColor.cgColor)
+        context?.setStrokeColor(UIColor.clear.cgColor)
+        
+        let bounds = CGRect(origin: .zero, size: size)
+        context?.addEllipse(in: bounds)
+        context?.drawPath(using: .fill)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
     }
 }
