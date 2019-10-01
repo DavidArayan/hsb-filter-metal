@@ -7,14 +7,51 @@
 //
 
 import UIKit
+import MetalKit
 
-class ViewController: UIViewController {
+/**
+ * This Controller also handles the simple Metal rendering for real-time
+ * adjustment of HSB values.
+ * NOTE: Ideally a separate Renderer class would be created, left over for
+ * simplicity
+ */
+class ViewController: UIViewController, MTKViewDelegate {
     @IBOutlet weak var hueSlider: GradientSlider!
     @IBOutlet weak var saturationSlider: GradientSlider!
     @IBOutlet weak var brightnessSlider: GradientSlider!
     
+    // Metal resources
+    var device: MTLDevice!
+    var commandQueue: MTLCommandQueue!
+    var sourceTexture: MTLTexture!
+    
+    // Metal View Instance
+    @IBOutlet weak var metalView: MTKView!
+    
+    // Core Image resources
+    var context: CIContext!
+    let saturationFilter = CIFilter(name: "CIColorControls")!
+    let brightnessFilter = CIFilter(name: "CIColorControls")!
+    let hueFilter = CIFilter(name: "CIHueAdjust")!
+    let colorSpace = CGColorSpace.init(name: CGColorSpace.extendedLinearDisplayP3)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        device = MTLCreateSystemDefaultDevice()
+        commandQueue = device.makeCommandQueue()!
+        
+        metalView.delegate = self
+        metalView.device = device
+        metalView.framebufferOnly = false
+        
+        context = CIContext(mtlDevice: device)
+        
+        // load texture as an MTL Texture
+        let loader = MTKTextureLoader(device: device)
+        let url = Bundle.main.url(forResource: "Neon-Source", withExtension: "png")!
+        sourceTexture = try! loader.newTexture(URL: url,
+                                               options: [MTKTextureLoader.Option.origin: MTKTextureLoader.Origin.flippedVertically])
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,6 +90,47 @@ class ViewController: UIViewController {
         hueSlider.setBackgroundGradient(gradients: hueGradients, height: 3.0)
         saturationSlider.setBackgroundGradient(gradients: satGradients, height: 3.0)
         brightnessSlider.setBackgroundGradient(gradients: briGradients, height: 3.0)
+    }
+    
+    // callbacks from METAL
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
+    
+    /**
+     * Perform real-time rendering into our Metal View
+     */
+    func draw(in view: MTKView) {
+        if let currentDrawable = view.currentDrawable {
+            let commandBuffer = commandQueue.makeCommandBuffer()!
+            
+            let inputImage = CIImage(mtlTexture: sourceTexture)!
+            
+            // process brightness filter
+            brightnessFilter.setValue(inputImage, forKey: kCIInputImageKey)
+            brightnessFilter.setValue(brightnessSlider.value as NSNumber, forKey: kCIInputBrightnessKey)
+            
+            let brightnessOutput = brightnessFilter.outputImage!
+            
+            // process saturation filter
+            saturationFilter.setValue(brightnessOutput, forKey: kCIInputImageKey)
+            saturationFilter.setValue(saturationSlider.value as NSNumber, forKey: kCIInputSaturationKey)
+            
+            let saturationOutput = saturationFilter.outputImage!
+            
+            // process the hue filter
+            hueFilter.setValue(saturationOutput, forKey: kCIInputImageKey)
+            hueFilter.setValue(hueSlider.value as NSNumber, forKey: "inputAngle")
+            
+            let hueOutput = hueFilter.outputImage!
+ 
+            context.render(hueOutput,
+                to: currentDrawable.texture,
+                commandBuffer: commandBuffer,
+                bounds: inputImage.extent,
+                colorSpace: colorSpace)
+            
+            commandBuffer.present(currentDrawable)
+            commandBuffer.commit()
+        }
     }
 }
 

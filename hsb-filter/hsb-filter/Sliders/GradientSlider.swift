@@ -97,8 +97,20 @@ class GradientSlider: UISlider {
     }
     
     private func updateThumbTintColor() {
+        // this performs a mapping between the slider values into a normalized
+        // range suitable for mapping the gradient
+        func map(x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
+            return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        }
+        
         if (self.gradients != nil) {
-            self.thumbTintColor = gradients?.colorAt(position: self.value)
+            let mappedValue:Float = map(x:self.value,
+                                        inMin:self.minimumValue,
+                                        inMax:self.maximumValue,
+                                        outMin:0.0,
+                                        outMax:1.0)
+            
+            self.thumbTintColor = gradients?.colorAt(position: mappedValue)
         }
     }
 }
