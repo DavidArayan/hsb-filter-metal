@@ -16,6 +16,9 @@ class GradientSlider: UISlider {
     let thumbMinSize:CGFloat = 10.0
     let thumbMaxSize:CGFloat = 31.0
     
+    // this will change and animate according to user actions
+    var currentThumbSize:CGFloat = 10.0
+    
     // we save this so we can use color interpolation for the handler
     // see GradientExt for the extension functions
     var gradients:[GradientValue]? = nil
@@ -137,7 +140,7 @@ class GradientSlider: UISlider {
             self.thumbTintColor = thumbColor
             
             // set the custom size/color of the thumb
-            setSliderThumbTintColor(color:thumbColor)
+            setThumbColor(color:thumbColor, withRadius:currentThumbSize)
         }
     }
     
@@ -153,8 +156,8 @@ class GradientSlider: UISlider {
         
         // this is the actual size of the thumb - NOTE: This needs to become dynamic
         // based on the size of the current thumb
-        let minNewTrack:Float = minTrack - 10.0
-        let maxNewTrack:Float = maxTrack + 10.0
+        let minNewTrack:Float = minTrack - Float(currentThumbSize)
+        let maxNewTrack:Float = maxTrack + Float(currentThumbSize)
         
         let currentValue:Float = Float(currentBounds.origin.x)
         
@@ -174,9 +177,12 @@ class GradientSlider: UISlider {
         return modifiedBounds
     }
     
-    func setSliderThumbTintColor(color: UIColor) {
+    /**
+     * Sets the thumb color and radius
+     */
+    func setThumbColor(color: UIColor, withRadius: CGFloat) {
         let imageSize:CGSize = CGSize(width: thumbMaxSize, height: thumbMaxSize)
-        let circleSize:CGSize = CGSize(width: thumbMinSize, height: thumbMinSize)
+        let circleSize:CGSize = CGSize(width: withRadius, height: withRadius)
         
         let circleImage:UIImage = makeCircleWith(size: imageSize, circleSize: circleSize, backgroundColor: color)
         
