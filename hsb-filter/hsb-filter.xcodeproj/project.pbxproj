@@ -40,6 +40,7 @@
 		6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344D65F23420A8400FECFBE /* GradientSlider.swift */; };
 		6344D66223420DCA00FECFBE /* UtilExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344D66123420DCA00FECFBE /* UtilExt.swift */; };
 		6344D66523421BF300FECFBE /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344D66423421BF300FECFBE /* BlurView.swift */; };
+		63D65BA42342EEEE0040F616 /* HSBFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D65BA32342EEEE0040F616 /* HSBFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		6344D65F23420A8400FECFBE /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
 		6344D66123420DCA00FECFBE /* UtilExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilExt.swift; sourceTree = "<group>"; };
 		6344D66423421BF300FECFBE /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		63D65BA32342EEEE0040F616 /* HSBFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSBFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		632E748D2340676E00D5DE53 /* hsb-filter */ = {
 			isa = PBXGroup;
 			children = (
+				63D65BA22342EEDB0040F616 /* Filters */,
 				6344D66323421BE200FECFBE /* Views */,
 				632E74D22340CC3500D5DE53 /* Sliders */,
 				632E748E2340676E00D5DE53 /* AppDelegate.swift */,
@@ -178,6 +181,14 @@
 				6344D66423421BF300FECFBE /* BlurView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		63D65BA22342EEDB0040F616 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				63D65BA32342EEEE0040F616 /* HSBFilter.swift */,
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +290,7 @@
 				6344D66223420DCA00FECFBE /* UtilExt.swift in Sources */,
 				632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */,
 				632E748F2340676E00D5DE53 /* AppDelegate.swift in Sources */,
+				63D65BA42342EEEE0040F616 /* HSBFilter.swift in Sources */,
 				632E74912340676E00D5DE53 /* SceneDelegate.swift in Sources */,
 				6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */,
 			);
