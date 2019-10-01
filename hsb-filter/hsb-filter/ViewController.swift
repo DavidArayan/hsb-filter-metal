@@ -87,9 +87,9 @@ class ViewController: UIViewController, MTKViewDelegate {
             GradientValue(color: UIColor(named: "Brightness 100")!, position: 1.0)
         ]
          
-        hueSlider.setBackgroundGradient(gradients: hueGradients, height: 3.0)
-        saturationSlider.setBackgroundGradient(gradients: satGradients, height: 3.0)
-        brightnessSlider.setBackgroundGradient(gradients: briGradients, height: 3.0)
+        hueSlider.setBackgroundGradient(gradients: hueGradients)
+        saturationSlider.setBackgroundGradient(gradients: satGradients)
+        brightnessSlider.setBackgroundGradient(gradients: briGradients)
     }
     
     // callbacks from METAL
