@@ -13,8 +13,8 @@ class GradientSlider: UISlider {
     
     // constant values for the thumb min and max size
     let trackHeight:CGFloat = 3
-    let thumbMinSize:CGFloat = 5.0
-    let thumbMaxSize:CGFloat = 30.0
+    let thumbMinSize:CGFloat = 10.0
+    let thumbMaxSize:CGFloat = 31.0
     
     // we save this so we can use color interpolation for the handler
     // see GradientExt for the extension functions
@@ -50,15 +50,17 @@ class GradientSlider: UISlider {
      * Handle smooth transition when the user moves the handle left to right
      */
     @objc func panGesture(gesture:UIPanGestureRecognizer) {
-        // perform the smooth transition
-        let currentPoint = gesture.location(in: self)
-        let percentage = currentPoint.x / self.bounds.size.width;
-        let delta = Float(percentage) * (self.maximumValue - self.minimumValue)
-        let value = self.minimumValue + delta
+        if (gesture.state == .changed) {
+            // perform the smooth transition
+            let currentPoint = gesture.location(in: self)
+            let percentage = currentPoint.x / self.bounds.size.width;
+            let delta = Float(percentage) * (self.maximumValue - self.minimumValue)
+            let value = self.minimumValue + delta
 
-        self.setValue(value, animated: true)
-        
-        updateThumbTintColor()
+            self.setValue(value, animated: true)
+            
+            updateThumbTintColor()
+        }
     }
     
     /**
@@ -98,6 +100,8 @@ class GradientSlider: UISlider {
 
         self.setMinimumTrackImage(stretchedImage, for: .normal)
         self.setMaximumTrackImage(stretchedImage, for: .normal)
+        
+        updateThumbTintColor()
     }
     
     /**
@@ -109,17 +113,17 @@ class GradientSlider: UISlider {
         updateThumbTintColor()
     }
     
+    // this performs a mapping between the slider values into a normalized
+    // range suitable for mapping the gradient
+    private func map(x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
+        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    }
+    
     /**
      * Called internally to change the tint color of the current thumb according
      * to the color of the gradient and current position
      */
     private func updateThumbTintColor() {
-        // this performs a mapping between the slider values into a normalized
-        // range suitable for mapping the gradient
-        func map(x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
-            return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-        }
-        
         if (self.gradients != nil) {
             let mappedValue:Float = map(x:self.value,
                                         inMin:self.minimumValue,
@@ -137,9 +141,44 @@ class GradientSlider: UISlider {
         }
     }
     
+    /**
+     * This handles cases to ensure the small thumb and large thumbs are mapped
+     * correctly onto the slider track
+     */
+    override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
+        let currentBounds:CGRect = super.thumbRect(forBounds: bounds, trackRect: rect, value: value)
+        
+        let minTrack:Float = 0.0
+        let maxTrack:Float = Float(bounds.size.width - bounds.size.height)
+        
+        // this is the actual size of the thumb - NOTE: This needs to become dynamic
+        // based on the size of the current thumb
+        let minNewTrack:Float = minTrack - 10.0
+        let maxNewTrack:Float = maxTrack + 10.0
+        
+        let currentValue:Float = Float(currentBounds.origin.x)
+        
+        // grab the new mapped value to be rendered in a new position, calculated
+        // from the old maximum position and new position based on thumb size
+        let mappedValue:Float = map(x:currentValue,
+                                    inMin:minTrack,
+                                    inMax:maxTrack,
+                                    outMin:minNewTrack,
+                                    outMax:maxNewTrack)
+        
+        let modifiedBounds:CGRect = CGRect(x: CGFloat(mappedValue),
+                                           y: currentBounds.origin.y,
+                                           width: currentBounds.size.width,
+                                           height: currentBounds.size.height)
+        
+        return modifiedBounds
+    }
+    
     func setSliderThumbTintColor(color: UIColor) {
-        let circleImage:UIImage = makeCircleWith(size: CGSize(width: thumbMaxSize, height: thumbMaxSize),
-                       backgroundColor: color)
+        let imageSize:CGSize = CGSize(width: thumbMaxSize, height: thumbMaxSize)
+        let circleSize:CGSize = CGSize(width: thumbMinSize, height: thumbMinSize)
+        
+        let circleImage:UIImage = makeCircleWith(size: imageSize, circleSize: circleSize, backgroundColor: color)
         
         self.setThumbImage(circleImage, for: .normal)
         self.setThumbImage(circleImage, for: .highlighted)
@@ -149,20 +188,22 @@ class GradientSlider: UISlider {
      * rather than redrawing the circles, we could pre-generate them and animate them
      * using an array. Would still need to change their color though
      */
-    fileprivate func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage {
+    fileprivate func makeCircleWith(size: CGSize, circleSize: CGSize, backgroundColor: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(backgroundColor.cgColor)
-        context?.setStrokeColor(UIColor.clear.cgColor)
+        let context:CGContext = UIGraphicsGetCurrentContext()!
+        context.setFillColor(backgroundColor.cgColor)
+        context.setStrokeColor(UIColor.clear.cgColor)
         
-        let bounds = CGRect(origin: .zero, size: size)
-        context?.addEllipse(in: bounds)
-        context?.drawPath(using: .fill)
+        let origin:CGPoint = CGPoint(x: 10.0, y: 10.0)
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let bounds = CGRect(origin: origin, size: circleSize)
+        context.addEllipse(in: bounds)
+        context.drawPath(using: .fill)
+        
+        let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        return image!
+        return image
     }
 }
