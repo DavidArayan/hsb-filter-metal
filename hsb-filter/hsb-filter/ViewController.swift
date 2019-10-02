@@ -169,6 +169,8 @@ class ViewController: UIViewController, MTKViewDelegate {
         disableHSB()
     }
     
+    // touch up inside/outside can probably be combined into
+    // a single action from the UI
     @IBAction func previewTouchUpInside() {
         enableHSB()
     }
@@ -177,6 +179,7 @@ class ViewController: UIViewController, MTKViewDelegate {
         enableHSB()
     }
     
+    // these are used by the preview functionality only
     var tempHueValue:Float = 0.0
     var tempSaturationValue:Float = 0.0
     var tempBrightnessValue:Float = 0.0
