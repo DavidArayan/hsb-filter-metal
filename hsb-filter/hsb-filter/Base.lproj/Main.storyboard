@@ -59,12 +59,32 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1366" height="186"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.85169627568493156" colorSpace="custom" customColorSpace="sRGB"/>
                                         <blurEffect style="systemChromeMaterialDark"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hl3-32-Pe7" userLabel="Buttons">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="186"/>
+                                        <rect key="frame" x="7" y="10" width="150" height="166"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alp-T0-shU">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="41.5"/>
+                                                <color key="backgroundColor" name="Disabled Button Color"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
+                                                <state key="normal" title="Reset">
+                                                    <color key="titleColor" name="Active Text Color"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="Ymp-yu-9CY"/>
+                                            <constraint firstItem="alp-T0-shU" firstAttribute="centerX" secondItem="Hl3-32-Pe7" secondAttribute="centerX" id="Mbh-BA-Yf4"/>
+                                            <constraint firstItem="alp-T0-shU" firstAttribute="top" secondItem="Hl3-32-Pe7" secondAttribute="top" id="XV9-hG-Ehl"/>
+                                            <constraint firstAttribute="width" constant="150" id="Ymp-yu-9CY"/>
+                                            <constraint firstItem="alp-T0-shU" firstAttribute="height" secondItem="Hl3-32-Pe7" secondAttribute="height" multiplier="1:4" id="g4l-Re-zQl"/>
+                                            <constraint firstItem="alp-T0-shU" firstAttribute="width" secondItem="Hl3-32-Pe7" secondAttribute="width" id="trH-ev-5eM"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
@@ -83,20 +103,20 @@
                                                 <color key="thumbTintColor" name="Brightness 50"/>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="W1L-Hc-z9O" userLabel="Hue Label">
-                                                <rect key="frame" x="650" y="33" width="30.5" height="20"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <rect key="frame" x="650" y="33.5" width="29" height="19"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Saturation Label">
-                                                <rect key="frame" x="650" y="83" width="75.5" height="20"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <rect key="frame" x="650" y="83.5" width="71" height="19"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Brightness Label">
-                                                <rect key="frame" x="650" y="133" width="79" height="20"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <rect key="frame" x="650" y="133.5" width="74.5" height="19"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -124,13 +144,13 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="0Dw-2a-iy4"/>
+                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" constant="-10" id="0Dw-2a-iy4"/>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="centerX" secondItem="Ma0-pt-Nn4" secondAttribute="centerX" id="3w7-1U-Uch"/>
-                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" id="B6q-jm-d40"/>
+                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" constant="10" id="B6q-jm-d40"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="trailing" secondItem="Ma0-pt-Nn4" secondAttribute="trailing" id="HDb-ie-YwS"/>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="width" secondItem="Ma0-pt-Nn4" secondAttribute="width" multiplier="1:2.1" id="KBX-hz-fV2"/>
                                     <constraint firstItem="m0v-SS-k1g" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" id="S3m-vB-Zbp"/>
-                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="V2Y-VK-8O1"/>
+                                    <constraint firstItem="Hl3-32-Pe7" firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" constant="7" id="V2Y-VK-8O1"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="eRi-hL-uUK"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" id="giQ-Tv-aWP"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="jcU-NG-y7r"/>
@@ -175,6 +195,9 @@
         </namedColor>
         <namedColor name="Brightness 50">
             <color red="0.50199997425079346" green="0.49799999594688416" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Disabled Button Color">
+            <color red="0.16470588235294117" green="0.16470588235294117" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Hue 50">
             <color red="0.45899999141693115" green="0.98400002717971802" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

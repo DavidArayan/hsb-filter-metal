@@ -38,6 +38,7 @@
 		632E74D12340B14600D5DE53 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 632E74D02340B14600D5DE53 /* Icon.png */; };
 		632E74D42340CC4E00D5DE53 /* GradientExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632E74D32340CC4E00D5DE53 /* GradientExt.swift */; };
 		6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6344D65F23420A8400FECFBE /* GradientSlider.swift */; };
+		6356FA302344BB1900F2BBFB /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356FA2F2344BB1900F2BBFB /* UIButtonExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		632E74D02340B14600D5DE53 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		632E74D32340CC4E00D5DE53 /* GradientExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExt.swift; sourceTree = "<group>"; };
 		6344D65F23420A8400FECFBE /* GradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSlider.swift; sourceTree = "<group>"; };
+		6356FA2F2344BB1900F2BBFB /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		632E748D2340676E00D5DE53 /* hsb-filter */ = {
 			isa = PBXGroup;
 			children = (
+				6356FA2E2344BAFC00F2BBFB /* Buttons */,
 				632E74D22340CC3500D5DE53 /* Sliders */,
 				632E748E2340676E00D5DE53 /* AppDelegate.swift */,
 				632E74902340676E00D5DE53 /* SceneDelegate.swift */,
@@ -164,6 +167,14 @@
 				6344D65F23420A8400FECFBE /* GradientSlider.swift */,
 			);
 			path = Sliders;
+			sourceTree = "<group>";
+		};
+		6356FA2E2344BAFC00F2BBFB /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				6356FA2F2344BB1900F2BBFB /* UIButtonExtension.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +276,7 @@
 				632E748F2340676E00D5DE53 /* AppDelegate.swift in Sources */,
 				632E74912340676E00D5DE53 /* SceneDelegate.swift in Sources */,
 				6344D66023420A8400FECFBE /* GradientSlider.swift in Sources */,
+				6356FA302344BB1900F2BBFB /* UIButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
