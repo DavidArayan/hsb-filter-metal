@@ -16,6 +16,12 @@ import MetalKit
  * simplicity
  */
 class ViewController: UIViewController, MTKViewDelegate {
+    
+    enum HSBRenderMode {
+        case enabled
+        case disabled
+    }
+    
     @IBOutlet weak var hueSlider: GradientSlider!
     @IBOutlet weak var saturationSlider: GradientSlider!
     @IBOutlet weak var brightnessSlider: GradientSlider!
@@ -34,6 +40,9 @@ class ViewController: UIViewController, MTKViewDelegate {
     let brightnessFilter = CIFilter(name: "CIColorControls")!
     let hueFilter = CIFilter(name: "CIHueAdjust")!
     let colorSpace = CGColorSpace.init(name: CGColorSpace.extendedLinearDisplayP3)!
+    
+    // render status
+    var renderStatus:HSBRenderMode = .enabled
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,45 +118,100 @@ class ViewController: UIViewController, MTKViewDelegate {
             
             let inputImage = CIImage(mtlTexture: sourceTexture)!
             
-            // process brightness filter
-            brightnessFilter.setValue(inputImage, forKey: kCIInputImageKey)
-            brightnessFilter.setValue(brightnessSlider.value as NSNumber, forKey: kCIInputBrightnessKey)
-            
-            let brightnessOutput = brightnessFilter.outputImage!
-            
-            // process saturation filter
-            saturationFilter.setValue(brightnessOutput, forKey: kCIInputImageKey)
-            saturationFilter.setValue(saturationSlider.value as NSNumber, forKey: kCIInputSaturationKey)
-            
-            let saturationOutput = saturationFilter.outputImage!
-            
-            // process the hue filter
-            hueFilter.setValue(saturationOutput, forKey: kCIInputImageKey)
-            hueFilter.setValue(hueSlider.value as NSNumber, forKey: "inputAngle")
-            
-            let hueOutput = hueFilter.outputImage!
- 
-            context.render(hueOutput,
-                to: currentDrawable.texture,
-                commandBuffer: commandBuffer,
-                bounds: inputImage.extent,
-                colorSpace: colorSpace)
+            // this is structly not needed however its nice to confirm that
+            // non HSB rendering image matches default HSB values
+            if (renderStatus == .enabled) {
+               // process brightness filter
+               brightnessFilter.setValue(inputImage, forKey: kCIInputImageKey)
+               brightnessFilter.setValue(brightnessSlider.value as NSNumber, forKey: kCIInputBrightnessKey)
+               
+               let brightnessOutput = brightnessFilter.outputImage!
+               
+               // process saturation filter
+               saturationFilter.setValue(brightnessOutput, forKey: kCIInputImageKey)
+               saturationFilter.setValue(saturationSlider.value as NSNumber, forKey: kCIInputSaturationKey)
+               
+               let saturationOutput = saturationFilter.outputImage!
+               
+               // process the hue filter
+               hueFilter.setValue(saturationOutput, forKey: kCIInputImageKey)
+               hueFilter.setValue(hueSlider.value as NSNumber, forKey: "inputAngle")
+               
+               let hueOutput = hueFilter.outputImage!
+    
+               context.render(hueOutput,
+                              to: currentDrawable.texture,
+                              commandBuffer: commandBuffer,
+                              bounds: inputImage.extent,
+                              colorSpace: colorSpace)
+            }
+            else {
+                context.render(inputImage,
+                               to: currentDrawable.texture,
+                               commandBuffer: commandBuffer,
+                               bounds: inputImage.extent,
+                               colorSpace: colorSpace)
+            }
             
             commandBuffer.present(currentDrawable)
             commandBuffer.commit()
         }
     }
     
+    /**
+     * Called by the "reset" button
+     */
     @IBAction func resetHSB(_ sender: UIButton) {
+        resetHSB()
+    }
+    
+    @IBAction func previewTouchDown() {
+        disableHSB()
+    }
+    
+    @IBAction func previewTouchUpInside() {
+        enableHSB()
+    }
+    
+    @IBAction func previewTouchUpOutside() {
+        enableHSB()
+    }
+    
+    var tempHueValue:Float = 0.0
+    var tempSaturationValue:Float = 0.0
+    var tempBrightnessValue:Float = 0.0
+    
+    fileprivate func resetHSB() {
         hueSlider.setAnimatedValue(0.0)
         saturationSlider.setAnimatedValue(1.0)
         brightnessSlider.setAnimatedValue(0.0)
     }
     
-    @IBAction func enableHSB(_ sender: UIButton) {
+    fileprivate func enableHSB() {
+        if (renderStatus == .disabled) {
+            renderStatus = .enabled
+            
+            hueSlider.setAnimatedValue(tempHueValue)
+            saturationSlider.setAnimatedValue(tempSaturationValue)
+            brightnessSlider.setAnimatedValue(tempBrightnessValue)
+        }
     }
     
-    @IBAction func disableHSB(_ sender: UIButton) {
+    fileprivate func disableHSB() {
+        // in here we will do a fancy thing where we temporarily save the
+        // previous slider values, and reset them back when rendering is
+        // re-enabled
+        if (renderStatus == .enabled) {
+            renderStatus = .disabled
+            
+            tempHueValue = hueSlider.value
+            tempSaturationValue = saturationSlider.value
+            tempBrightnessValue = brightnessSlider.value
+            
+            hueSlider.setAnimatedValue(0.0)
+            saturationSlider.setAnimatedValue(1.0)
+            brightnessSlider.setAnimatedValue(0.0)
+        }
     }
 }
 

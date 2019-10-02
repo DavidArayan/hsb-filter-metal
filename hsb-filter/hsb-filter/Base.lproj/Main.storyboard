@@ -94,8 +94,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="disableHSB:" destination="BYZ-38-t0r" eventType="touchDownRepeat" id="ZJ5-16-jG8"/>
-                                                    <action selector="enableHSB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xMR-d0-wKS"/>
+                                                    <action selector="previewTouchDown" destination="BYZ-38-t0r" eventType="touchDown" id="3un-3a-Ub7"/>
+                                                    <action selector="previewTouchUpInside" destination="BYZ-38-t0r" eventType="touchUpInside" id="I4a-41-Wj2"/>
+                                                    <action selector="previewTouchUpOutside" destination="BYZ-38-t0r" eventType="touchUpOutside" id="jQ8-1c-pIr"/>
                                                 </connections>
                                             </button>
                                         </subviews>
