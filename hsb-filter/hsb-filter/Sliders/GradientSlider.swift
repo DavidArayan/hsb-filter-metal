@@ -132,6 +132,13 @@ class GradientSlider: UISlider {
             
             updateThumbTintColor()
         }
+        
+        if (gesture.state == .began) {
+            touchDown()
+        }
+        else if (gesture.state == .ended) {
+            touchUp()
+        }
     }
     
     /**
