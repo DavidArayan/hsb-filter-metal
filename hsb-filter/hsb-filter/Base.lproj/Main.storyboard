@@ -63,10 +63,10 @@
                                         <blurEffect style="systemChromeMaterialDark"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hl3-32-Pe7" userLabel="Buttons">
-                                        <rect key="frame" x="7" y="10" width="150" height="166"/>
+                                        <rect key="frame" x="7" y="10" width="145" height="166"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alp-T0-shU">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="41.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="145" height="41.5"/>
                                                 <color key="backgroundColor" name="Disabled Button Color"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
                                                 <state key="normal" title="Reset">
@@ -78,12 +78,29 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Rz-MV-00a" userLabel="Preview">
+                                                <rect key="frame" x="0.0" y="43" width="145" height="41.5"/>
+                                                <color key="backgroundColor" name="Active Button Color"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
+                                                <state key="normal" title="Preview">
+                                                    <color key="titleColor" name="Active Text Color"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="6Rz-MV-00a" firstAttribute="width" secondItem="Hl3-32-Pe7" secondAttribute="width" id="70C-hk-GCI"/>
+                                            <constraint firstItem="6Rz-MV-00a" firstAttribute="height" secondItem="Hl3-32-Pe7" secondAttribute="height" multiplier="1:4" id="C8X-9U-lxK"/>
                                             <constraint firstItem="alp-T0-shU" firstAttribute="centerX" secondItem="Hl3-32-Pe7" secondAttribute="centerX" id="Mbh-BA-Yf4"/>
+                                            <constraint firstItem="6Rz-MV-00a" firstAttribute="top" secondItem="alp-T0-shU" secondAttribute="bottom" constant="1.5" id="N9i-lj-Jz0"/>
                                             <constraint firstItem="alp-T0-shU" firstAttribute="top" secondItem="Hl3-32-Pe7" secondAttribute="top" id="XV9-hG-Ehl"/>
-                                            <constraint firstAttribute="width" constant="150" id="Ymp-yu-9CY"/>
+                                            <constraint firstAttribute="width" constant="145" id="Ymp-yu-9CY"/>
                                             <constraint firstItem="alp-T0-shU" firstAttribute="height" secondItem="Hl3-32-Pe7" secondAttribute="height" multiplier="1:4" id="g4l-Re-zQl"/>
+                                            <constraint firstItem="6Rz-MV-00a" firstAttribute="centerX" secondItem="Hl3-32-Pe7" secondAttribute="centerX" id="jty-vS-dsH"/>
                                             <constraint firstItem="alp-T0-shU" firstAttribute="width" secondItem="Hl3-32-Pe7" secondAttribute="width" id="trH-ev-5eM"/>
                                         </constraints>
                                     </view>
@@ -187,6 +204,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Active Button Color">
+            <color red="0.22699999809265137" green="0.22699999809265137" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Active Text Color">
             <color red="0.65499997138977051" green="0.6589999794960022" blue="0.65499997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
