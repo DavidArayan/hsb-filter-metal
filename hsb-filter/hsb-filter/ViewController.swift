@@ -53,8 +53,13 @@ class ViewController: UIViewController, MTKViewDelegate {
         
         // simulator shows this upside down, real devices show real way up
         // simulator bugged or device bugged.. or both bugged? or none bugged?
+        #if targetEnvironment(simulator)
+        sourceTexture = try! loader.newTexture(URL: url,
+                                               options: [:])
+        #else
         sourceTexture = try! loader.newTexture(URL: url,
                                                options: [MTKTextureLoader.Option.origin: MTKTextureLoader.Origin.flippedVertically])
+        #endif
     }
     
     override func viewDidLayoutSubviews() {
