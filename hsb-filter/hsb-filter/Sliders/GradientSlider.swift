@@ -148,9 +148,8 @@ class GradientSlider: UISlider {
         let percentage = pt.x / (slider?.frame.size.width)!
         let delta = Float(percentage) * Float((slider?.maximumValue)! - (slider?.minimumValue)!)
         let value = (slider?.minimumValue)! + delta
-        slider?.setValue(Float(value), animated: true)
         
-        updateThumbTintColor()
+        setAnimatedValue(Float(value))
     }
     
     /**
