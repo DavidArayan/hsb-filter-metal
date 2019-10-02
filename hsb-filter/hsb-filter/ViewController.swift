@@ -75,7 +75,6 @@ class ViewController: UIViewController, MTKViewDelegate {
             GradientValue(color: UIColor(named: "Hue 13")!, position: 0.13),
             GradientValue(color: UIColor(named: "Hue 31")!, position: 0.31),
             GradientValue(color: UIColor(named: "Hue 45")!, position: 0.45),
-            GradientValue(color: UIColor(named: "Hue 50")!, position: 0.50),
             GradientValue(color: UIColor(named: "Hue 56")!, position: 0.56),
             GradientValue(color: UIColor(named: "Hue 66")!, position: 0.66),
             GradientValue(color: UIColor(named: "Hue 73")!, position: 0.73),
@@ -85,13 +84,11 @@ class ViewController: UIViewController, MTKViewDelegate {
          
         let satGradients:[GradientValue] = [
             GradientValue(color: UIColor(named: "Saturation 0")!, position: 0.0),
-            GradientValue(color: UIColor(named: "Saturation 50")!, position: 0.50),
             GradientValue(color: UIColor(named: "Saturation 100")!, position: 1.0)
         ]
          
         let briGradients:[GradientValue] = [
             GradientValue(color: UIColor(named: "Brightness 0")!, position: 0.0),
-            GradientValue(color: UIColor(named: "Brightness 50")!, position: 0.50),
             GradientValue(color: UIColor(named: "Brightness 100")!, position: 1.0)
         ]
          

@@ -11,6 +11,9 @@
         <array key="SF-UI-Display-Regular.otf">
             <string>SFUIDisplay-Regular</string>
         </array>
+        <array key="SF-UI-Text-Light.otf">
+            <string>SFUIText-Light</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -24,6 +27,29 @@
                             <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="vA5-wc-7Wg" userLabel="Metal View">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1004"/>
                             </mtkView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erI-96-gNC" userLabel="Blurred Top Nav">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="19"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SAm-fp-DEL">
+                                    <rect key="frame" x="0.0" y="0.0" width="1366" height="19"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue, Saturation, Brightness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7u-Re-jzv">
+                                            <rect key="frame" x="593.5" y="2" width="179.5" height="17"/>
+                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                            <color key="textColor" name="Brightness 100"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="H7u-Re-jzv" firstAttribute="centerX" secondItem="SAm-fp-DEL" secondAttribute="centerX" id="2gX-Ip-N8a"/>
+                                        <constraint firstItem="H7u-Re-jzv" firstAttribute="bottom" secondItem="SAm-fp-DEL" secondAttribute="bottom" id="Vo8-qa-wPs"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="Rvp-bu-UKE"/>
+                                </constraints>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-pt-Nn4" userLabel="Bottom Nav">
                                 <rect key="frame" x="0.0" y="838" width="1366" height="186"/>
                                 <subviews>
@@ -114,11 +140,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="56Q-oy-6dI"/>
+                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="56Q-oy-6dI"/>
                             <constraint firstItem="vA5-wc-7Wg" firstAttribute="leading" secondItem="Jqk-Xi-0nT" secondAttribute="leading" id="84l-Qg-Hc1"/>
-                            <constraint firstAttribute="trailing" secondItem="Ma0-pt-Nn4" secondAttribute="trailing" id="CZR-ue-gUQ"/>
-                            <constraint firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="HWR-fb-byz"/>
+                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="CZR-ue-gUQ"/>
+                            <constraint firstItem="Ma0-pt-Nn4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HWR-fb-byz"/>
                             <constraint firstItem="vA5-wc-7Wg" firstAttribute="bottom" secondItem="Jqk-Xi-0nT" secondAttribute="bottom" id="N8r-Wy-Kjp"/>
+                            <constraint firstItem="erI-96-gNC" firstAttribute="leading" secondItem="Jqk-Xi-0nT" secondAttribute="leading" id="ahR-ZB-48b"/>
+                            <constraint firstItem="erI-96-gNC" firstAttribute="top" secondItem="Jqk-Xi-0nT" secondAttribute="top" id="ihx-Xy-zeY"/>
+                            <constraint firstItem="erI-96-gNC" firstAttribute="trailing" secondItem="Jqk-Xi-0nT" secondAttribute="trailing" id="iia-AE-JXX"/>
                             <constraint firstItem="vA5-wc-7Wg" firstAttribute="trailing" secondItem="Jqk-Xi-0nT" secondAttribute="trailing" id="jC3-UH-wE2"/>
                             <constraint firstItem="vA5-wc-7Wg" firstAttribute="top" secondItem="Jqk-Xi-0nT" secondAttribute="top" id="lAl-ca-VR8"/>
                             <constraint firstItem="Ma0-pt-Nn4" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:5.5" id="uir-3r-zl1"/>
@@ -140,6 +169,9 @@
     <resources>
         <namedColor name="Active Text Color">
             <color red="0.65499997138977051" green="0.6589999794960022" blue="0.65499997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Brightness 100">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Brightness 50">
             <color red="0.50199997425079346" green="0.49799999594688416" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
