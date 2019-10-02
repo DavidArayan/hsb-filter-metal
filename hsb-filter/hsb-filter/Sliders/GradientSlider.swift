@@ -11,6 +11,15 @@ import UIKit
 
 class GradientSlider: UISlider {
     
+    /**
+     * Simple cases to handle the thumb grow/shrink animation
+     */
+    enum ThumbState {
+        case touchedDown
+        case touchedUp
+        case idle
+    }
+    
     // constant values for the thumb min and max size
     let trackHeight:CGFloat = 3
     let thumbMinSize:CGFloat = 10.0
@@ -18,6 +27,12 @@ class GradientSlider: UISlider {
     
     // this will change and animate according to user actions
     var currentThumbSize:CGFloat = 10.0
+    
+    // these are the animations responsible for growing/shrinking the
+    // thumb graphic when the user touches down/up
+    let animationFactor:CGFloat = 5.0
+    var timerUpdate:Timer? = nil
+    var animationState:ThumbState = .idle
     
     // we save this so we can use color interpolation for the handler
     // see GradientExt for the extension functions
@@ -39,14 +54,67 @@ class GradientSlider: UISlider {
         self.addTarget(self, action: #selector(touchDown), for:UIControl.Event.touchDown)
         self.addTarget(self, action: #selector(touchUp), for:UIControl.Event.touchUpInside)
         self.addTarget(self, action: #selector(touchUp), for:UIControl.Event.touchUpOutside)
+        
+        // setup the grow animation when the user touches down
+        self.timerUpdate = Timer.scheduledTimer(timeInterval: 0.03,
+                                                target: self,
+                                                selector: #selector(update),
+                                                userInfo: nil,
+                                                repeats: true)
+    }
+    
+    /**
+     * This is called continuously by a timer every 33ms
+     */
+    @objc func update() {
+        switch animationState {
+        case .touchedDown:
+            // we grow our current thumb size to the maximum size
+            let newSize:CGFloat = currentThumbSize + animationFactor
+            
+            let clampedSize:CGFloat = clamp(newSize,
+                                                 minValue: thumbMinSize,
+                                                 maxValue: thumbMaxSize)
+            
+            // we have reached the upper limit, cut off from here
+            if (clampedSize < newSize) {
+                animationState = .idle
+                currentThumbSize = thumbMaxSize
+            }
+            else {
+                currentThumbSize = clampedSize
+            }
+        case .touchedUp:
+            // we shrink our current thumb size to the minimum size
+            let newSize:CGFloat = currentThumbSize - animationFactor
+            
+            let clampedSize:CGFloat = clamp(newSize,
+                                                 minValue: thumbMinSize,
+                                                 maxValue: thumbMaxSize)
+            
+            // we have reached the lower limit, cut off from here
+            if (clampedSize > newSize) {
+                animationState = .idle
+                currentThumbSize = thumbMinSize
+            }
+            else {
+                currentThumbSize = clampedSize
+            }
+        case .idle:
+            // do nothing, not even update, this is a no-op
+            return
+        }
+        
+        // update the look/feel
+        updateThumbTintColor()
     }
     
     @objc func touchDown() {
-        
+        animationState = .touchedDown
     }
     
     @objc func touchUp() {
-        
+        animationState = .touchedUp
     }
     
     /**
@@ -116,19 +184,13 @@ class GradientSlider: UISlider {
         updateThumbTintColor()
     }
     
-    // this performs a mapping between the slider values into a normalized
-    // range suitable for mapping the gradient
-    private func map(x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
-        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    }
-    
     /**
      * Called internally to change the tint color of the current thumb according
      * to the color of the gradient and current position
      */
     private func updateThumbTintColor() {
         if (self.gradients != nil) {
-            let mappedValue:Float = map(x:self.value,
+            let mappedValue:Float = map(self.value,
                                         inMin:self.minimumValue,
                                         inMax:self.maximumValue,
                                         outMin:0.0,
@@ -154,16 +216,24 @@ class GradientSlider: UISlider {
         let minTrack:Float = 0.0
         let maxTrack:Float = Float(bounds.size.width - bounds.size.height)
         
-        // this is the actual size of the thumb - NOTE: This needs to become dynamic
+        // map the current thumb size so the rendering appears correct on both ends
+        // of the track regardless of the current thumb size
+        let trackFactor:Float = map(Float(currentThumbSize),
+                                    inMin:Float(thumbMinSize),
+                                    inMax:Float(thumbMaxSize),
+                                    outMin:Float(thumbMinSize),
+                                    outMax:0.0)
+        
+        // this is the actual size of the thumb
         // based on the size of the current thumb
-        let minNewTrack:Float = minTrack - Float(currentThumbSize)
-        let maxNewTrack:Float = maxTrack + Float(currentThumbSize)
+        let minNewTrack:Float = minTrack - trackFactor
+        let maxNewTrack:Float = maxTrack + trackFactor
         
         let currentValue:Float = Float(currentBounds.origin.x)
         
         // grab the new mapped value to be rendered in a new position, calculated
         // from the old maximum position and new position based on thumb size
-        let mappedValue:Float = map(x:currentValue,
+        let mappedValue:Float = map(currentValue,
                                     inMin:minTrack,
                                     inMax:maxTrack,
                                     outMin:minNewTrack,
@@ -201,7 +271,13 @@ class GradientSlider: UISlider {
         context.setFillColor(backgroundColor.cgColor)
         context.setStrokeColor(UIColor.clear.cgColor)
         
-        let origin:CGPoint = CGPoint(x: 10.0, y: 10.0)
+        let originPt:Float = map(Float(circleSize.width),
+                                 inMin: Float(thumbMinSize),
+                                 inMax: Float(thumbMaxSize),
+                                 outMin: Float(thumbMinSize),
+                                 outMax: 0.0)
+        
+        let origin:CGPoint = CGPoint(x: CGFloat(originPt), y: CGFloat(originPt))
         
         let bounds = CGRect(origin: origin, size: circleSize)
         context.addEllipse(in: bounds)
@@ -211,5 +287,21 @@ class GradientSlider: UISlider {
         UIGraphicsEndImageContext()
         
         return image
+    }
+    
+    /**
+     * UTILITY FUNCTIONS
+     * These can probably move somewhere else for re-usability
+     * These can also be made static.
+     */
+    
+    // this performs a mapping between the slider values into a normalized
+    // range suitable for mapping the gradient
+    private func map(_ x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
+        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
+    }
+    
+    private func clamp(_ x:CGFloat, minValue:CGFloat, maxValue:CGFloat) -> CGFloat {
+        return min(max(x, minValue), maxValue)
     }
 }

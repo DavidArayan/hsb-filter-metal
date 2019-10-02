@@ -50,6 +50,9 @@ class ViewController: UIViewController, MTKViewDelegate {
         // load texture as an MTL Texture
         let loader = MTKTextureLoader(device: device)
         let url = Bundle.main.url(forResource: "Neon-Source", withExtension: "png")!
+        
+        // simulator shows this upside down, real devices show real way up
+        // simulator bugged or device bugged.. or both bugged? or none bugged?
         sourceTexture = try! loader.newTexture(URL: url,
                                                options: [MTKTextureLoader.Option.origin: MTKTextureLoader.Origin.flippedVertically])
     }
