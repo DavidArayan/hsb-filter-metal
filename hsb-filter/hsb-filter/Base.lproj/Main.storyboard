@@ -34,7 +34,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue, Saturation, Brightness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7u-Re-jzv">
-                                            <rect key="frame" x="593.5" y="2" width="179.5" height="17"/>
+                                            <rect key="frame" x="597" y="2" width="172.5" height="17"/>
                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                             <color key="textColor" name="Brightness 100"/>
                                             <nil key="highlightedColor"/>
@@ -77,6 +77,9 @@
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="resetHSB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cX1-rc-uNY"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Rz-MV-00a" userLabel="Preview">
                                                 <rect key="frame" x="0.0" y="43" width="145" height="41.5"/>
@@ -90,6 +93,10 @@
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="disableHSB:" destination="BYZ-38-t0r" eventType="touchDownRepeat" id="ZJ5-16-jG8"/>
+                                                    <action selector="enableHSB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xMR-d0-wKS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -126,13 +133,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Saturation Label">
-                                                <rect key="frame" x="650" y="83.5" width="71" height="19"/>
+                                                <rect key="frame" x="650" y="83.5" width="73.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Brightness Label">
-                                                <rect key="frame" x="650" y="133.5" width="74.5" height="19"/>
+                                                <rect key="frame" x="650" y="133.5" width="76.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
                                                 <color key="textColor" name="Active Text Color"/>
                                                 <nil key="highlightedColor"/>

@@ -178,8 +178,8 @@ class GradientSlider: UISlider {
     /**
      * Resets back to the original value of 0.5
      */
-    public func reset() {
-        self.setValue(0.5, animated: true)
+    public func setAnimatedValue(_ value:Float) {
+        self.setValue(value, animated: true)
         
         updateThumbTintColor()
     }

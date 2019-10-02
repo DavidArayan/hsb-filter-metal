@@ -137,5 +137,17 @@ class ViewController: UIViewController, MTKViewDelegate {
             commandBuffer.commit()
         }
     }
+    
+    @IBAction func resetHSB(_ sender: UIButton) {
+        hueSlider.setAnimatedValue(0.0)
+        saturationSlider.setAnimatedValue(1.0)
+        brightnessSlider.setAnimatedValue(0.0)
+    }
+    
+    @IBAction func enableHSB(_ sender: UIButton) {
+    }
+    
+    @IBAction func disableHSB(_ sender: UIButton) {
+    }
 }
 
