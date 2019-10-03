@@ -132,6 +132,7 @@
                                                 <constraints>
                                                     <constraint firstItem="xsr-s2-eft" firstAttribute="leading" secondItem="p9C-Vy-m85" secondAttribute="trailing" id="1Pq-Bd-A5y"/>
                                                     <constraint firstItem="8At-WI-jJA" firstAttribute="centerY" secondItem="p9C-Vy-m85" secondAttribute="centerY" id="3LX-JC-c1W"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xsr-s2-eft" secondAttribute="trailing" constant="-75" id="4nj-Dn-Yay"/>
                                                     <constraint firstItem="8At-WI-jJA" firstAttribute="trailing" secondItem="xsr-s2-eft" secondAttribute="leading" constant="-20" id="lqT-8d-MmK"/>
                                                     <constraint firstItem="xsr-s2-eft" firstAttribute="centerY" secondItem="p9C-Vy-m85" secondAttribute="centerY" id="wRO-D5-hGP"/>
                                                     <constraint firstItem="8At-WI-jJA" firstAttribute="leading" secondItem="p9C-Vy-m85" secondAttribute="leading" id="xBv-Ps-c4V"/>
@@ -157,6 +158,7 @@
                                                     <constraint firstItem="W1L-Hc-z9O" firstAttribute="leading" secondItem="leo-nd-B8Z" secondAttribute="trailing" id="jFZ-PX-CiY"/>
                                                     <constraint firstItem="dRj-4B-aqP" firstAttribute="leading" secondItem="leo-nd-B8Z" secondAttribute="leading" id="pJl-W4-SAq"/>
                                                     <constraint firstItem="dRj-4B-aqP" firstAttribute="trailing" secondItem="W1L-Hc-z9O" secondAttribute="leading" constant="-20" id="wL3-Wq-VbY"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W1L-Hc-z9O" secondAttribute="trailing" constant="-75" id="xqi-Y1-uck"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gY-9E-noI" userLabel="Saturation">
@@ -176,6 +178,7 @@
                                                 <constraints>
                                                     <constraint firstItem="pRG-nj-3IN" firstAttribute="centerY" secondItem="2gY-9E-noI" secondAttribute="centerY" id="2ja-F4-QSl"/>
                                                     <constraint firstAttribute="height" constant="20" id="73G-rC-wvS"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pRG-nj-3IN" secondAttribute="trailing" constant="-75" id="Dqv-X1-eAO"/>
                                                     <constraint firstItem="pRG-nj-3IN" firstAttribute="leading" secondItem="2gY-9E-noI" secondAttribute="trailing" id="T0w-jc-4fr"/>
                                                     <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerY" secondItem="2gY-9E-noI" secondAttribute="centerY" id="aC9-iB-cd2"/>
                                                     <constraint firstItem="jQc-Xi-uc9" firstAttribute="trailing" secondItem="pRG-nj-3IN" secondAttribute="leading" constant="-20" id="hO2-5v-cBl"/>
