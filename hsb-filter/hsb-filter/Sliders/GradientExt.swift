@@ -118,20 +118,15 @@ extension Array where Element == GradientValue {
         let colorA = self.getRGBA(atIndex: end - 1)
         let colorB = self.getRGBA(atIndex: end)
         
-        // define our lerp function
-        func lerp(a:CGFloat, b:CGFloat, t:CGFloat) -> CGFloat {
-            return (a * (1.0 - t)) + (b * t);
-        }
-        
         // now we lerp(colorA, colorB, spanTime)
         // return (a * (1.0f - f)) + (b * f);
         let cgSpanTime:CGFloat = CGFloat(spanTime)
         
         // this could be SIMD accelerated for performance
-        let lerpR:CGFloat = lerp(a: colorA.red, b: colorB.red, t: cgSpanTime)
-        let lerpG:CGFloat = lerp(a: colorA.green, b: colorB.green, t: cgSpanTime)
-        let lerpB:CGFloat = lerp(a: colorA.blue, b: colorB.blue, t: cgSpanTime)
-        let lerpA:CGFloat = lerp(a: colorA.alpha, b: colorB.alpha, t: cgSpanTime)
+        let lerpR:CGFloat = Util.lerp(a: colorA.red, b: colorB.red, t: cgSpanTime)
+        let lerpG:CGFloat = Util.lerp(a: colorA.green, b: colorB.green, t: cgSpanTime)
+        let lerpB:CGFloat = Util.lerp(a: colorA.blue, b: colorB.blue, t: cgSpanTime)
+        let lerpA:CGFloat = Util.lerp(a: colorA.alpha, b: colorB.alpha, t: cgSpanTime)
         
         // create and return our generated/lerped UIColor
         return UIColor(red: lerpR, green: lerpG, blue: lerpB, alpha: lerpA)

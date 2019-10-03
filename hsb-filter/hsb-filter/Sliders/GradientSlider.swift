@@ -20,6 +20,14 @@ class GradientSlider: UISlider {
         case idle
     }
     
+    /**
+     * Simple cases to handle the track translation
+     */
+    enum TrackState {
+        case animating
+        case idle
+    }
+    
     // constant values for the thumb min and max size
     let trackHeight:CGFloat = 3
     let thumbMinSize:CGFloat = 10.0
@@ -30,13 +38,34 @@ class GradientSlider: UISlider {
     
     // these are the animations responsible for growing/shrinking the
     // thumb graphic when the user touches down/up
-    let animationFactor:CGFloat = 5.0
+    let animationFactor:CGFloat = 2.5
     var timerUpdate:Timer? = nil
     var animationState:ThumbState = .idle
+    
+    // this is the track translation animation factors. Using normal animation
+    // frameworks did not work well, so implemented my own.
+    let trackAnimationTimeFactor:CGFloat = 0.1
+    var trackAnimationTime:CGFloat = 0.0
+    var startValue:CGFloat = 0.0
+    var targetValue:CGFloat = 0.0
+    var trackAnimationState:TrackState = .idle
     
     // we save this so we can use color interpolation for the handler
     // see GradientExt for the extension functions
     var gradients:[GradientValue]? = nil
+    
+    // This is to ensure that the proper final non-animated value
+    // is returned, so we don't mix up animations with slider final
+    // values in the main application
+    var realValue:Float {
+        get {
+            if (trackAnimationState == .idle) {
+                return self.value
+            }
+            
+            return Float(self.targetValue)
+        }
+    }
     
     required init? (coder: NSCoder) {
         super.init(coder: coder)
@@ -56,7 +85,7 @@ class GradientSlider: UISlider {
         self.addTarget(self, action: #selector(touchUp), for:UIControl.Event.touchUpOutside)
         
         // setup the grow animation when the user touches down
-        self.timerUpdate = Timer.scheduledTimer(timeInterval: 0.03,
+        self.timerUpdate = Timer.scheduledTimer(timeInterval: 0.01,
                                                 target: self,
                                                 selector: #selector(update),
                                                 userInfo: nil,
@@ -72,7 +101,7 @@ class GradientSlider: UISlider {
             // we grow our current thumb size to the maximum size
             let newSize:CGFloat = currentThumbSize + animationFactor
             
-            let clampedSize:CGFloat = clamp(newSize,
+            let clampedSize:CGFloat = Util.clamp(newSize,
                                                  minValue: thumbMinSize,
                                                  maxValue: thumbMaxSize)
             
@@ -88,7 +117,7 @@ class GradientSlider: UISlider {
             // we shrink our current thumb size to the minimum size
             let newSize:CGFloat = currentThumbSize - animationFactor
             
-            let clampedSize:CGFloat = clamp(newSize,
+            let clampedSize:CGFloat = Util.clamp(newSize,
                                                  minValue: thumbMinSize,
                                                  maxValue: thumbMaxSize)
             
@@ -101,12 +130,35 @@ class GradientSlider: UISlider {
                 currentThumbSize = clampedSize
             }
         case .idle:
-            // do nothing, not even update, this is a no-op
-            return
+            break
+        }
+        
+        switch trackAnimationState {
+        case .animating:
+            let currentValue:CGFloat = Util.lerp(a: self.startValue,
+                                                 b: self.targetValue,
+                                                 t: self.trackAnimationTime)
+            
+            let newTrackTime:CGFloat = self.trackAnimationTime + self.trackAnimationTimeFactor
+            let clampedTrackTime:CGFloat = Util.clamp(newTrackTime, minValue: 0.0, maxValue: 1.0)
+            
+            // see if we should be terminating the animation or proceeding as normal
+            if (newTrackTime > clampedTrackTime) {
+                self.setValue(Float(self.targetValue), animated: true)
+                trackAnimationState = .idle
+            }
+            else {
+                trackAnimationTime = clampedTrackTime
+                self.setValue(Float(currentValue), animated: true)
+            }
+        case .idle:
+            break
         }
         
         // update the look/feel
-        updateThumbTintColor()
+        if (animationState != .idle || trackAnimationState != .idle) {
+            updateThumbTintColor()
+        }
     }
     
     @objc func touchDown() {
@@ -121,7 +173,7 @@ class GradientSlider: UISlider {
      * Handle smooth transition when the user moves the handle left to right
      */
     @objc func panGesture(gesture:UIPanGestureRecognizer) {
-        if (gesture.state == .changed) {
+        if (gesture.state == .changed && trackAnimationState == .idle) {
             // perform the smooth transition
             let currentPoint = gesture.location(in: self)
             let percentage = currentPoint.x / self.bounds.size.width;
@@ -182,12 +234,13 @@ class GradientSlider: UISlider {
     }
     
     /**
-     * Resets back to the original value of 0.5
+     * Interpolate the track value over time
      */
     public func setAnimatedValue(_ value:Float) {
-        self.setValue(value, animated: true)
-        
-        updateThumbTintColor()
+        self.targetValue = CGFloat(value)
+        self.startValue = CGFloat(self.value)
+        self.trackAnimationTime = 0.0
+        self.trackAnimationState = .animating
     }
     
     /**
@@ -196,13 +249,13 @@ class GradientSlider: UISlider {
      */
     private func updateThumbTintColor() {
         if (self.gradients != nil) {
-            let mappedValue:Float = map(self.value,
-                                        inMin:self.minimumValue,
-                                        inMax:self.maximumValue,
-                                        outMin:0.0,
-                                        outMax:1.0)
+            let mappedValue:CGFloat = Util.map(CGFloat(self.value),
+                                             inMin:CGFloat(self.minimumValue),
+                                             inMax:CGFloat(self.maximumValue),
+                                             outMin:0.0,
+                                             outMax:1.0)
             
-            let thumbColor:UIColor = gradients!.colorAt(position: mappedValue)
+            let thumbColor:UIColor = gradients!.colorAt(position: Float(mappedValue))
             
             // if this is not set, things go crazy... i don't know why
             self.thumbTintColor = thumbColor
@@ -219,33 +272,38 @@ class GradientSlider: UISlider {
     override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
         let currentBounds:CGRect = super.thumbRect(forBounds: bounds, trackRect: rect, value: value)
         
-        let minTrack:Float = 0.0
-        let maxTrack:Float = Float(bounds.size.width - bounds.size.height)
+        let minTrack:CGFloat = 0.0
+        let maxTrack:CGFloat = bounds.size.width - bounds.size.height
         
         // map the current thumb size so the rendering appears correct on both ends
         // of the track regardless of the current thumb size
-        let trackFactor:Float = map(Float(currentThumbSize),
-                                    inMin:Float(thumbMinSize),
-                                    inMax:Float(thumbMaxSize),
-                                    outMin:Float(thumbMinSize),
-                                    outMax:0.0)
+        let trackFactor:CGFloat = Util.map(currentThumbSize,
+                                         inMin:thumbMinSize,
+                                         inMax:thumbMaxSize,
+                                         outMin:thumbMinSize,
+                                         outMax:0.0)
         
         // this is the actual size of the thumb
         // based on the size of the current thumb
-        let minNewTrack:Float = minTrack - trackFactor
-        let maxNewTrack:Float = maxTrack + trackFactor
+        let minNewTrack:CGFloat = minTrack - trackFactor
+        let maxNewTrack:CGFloat = maxTrack + trackFactor
         
-        let currentValue:Float = Float(currentBounds.origin.x)
+        // NOTE: Uncomment to have the track go all the way instead of locking
+        // inside the track. With the current implementation it felt quite odd during use
+        // let minNewTrack:CGFloat = minTrack - trackFactor - (currentThumbSize / 2.0)
+        // let maxNewTrack:CGFloat = maxTrack + trackFactor + (currentThumbSize / 2.0)
+        
+        let currentValue:CGFloat = currentBounds.origin.x
         
         // grab the new mapped value to be rendered in a new position, calculated
         // from the old maximum position and new position based on thumb size
-        let mappedValue:Float = map(currentValue,
-                                    inMin:minTrack,
-                                    inMax:maxTrack,
-                                    outMin:minNewTrack,
-                                    outMax:maxNewTrack)
+        let mappedValue:CGFloat = Util.map(currentValue,
+                                         inMin:minTrack,
+                                         inMax:maxTrack,
+                                         outMin:minNewTrack,
+                                         outMax:maxNewTrack)
         
-        let modifiedBounds:CGRect = CGRect(x: CGFloat(mappedValue),
+        let modifiedBounds:CGRect = CGRect(x: mappedValue,
                                            y: currentBounds.origin.y,
                                            width: currentBounds.size.width,
                                            height: currentBounds.size.height)
@@ -277,13 +335,13 @@ class GradientSlider: UISlider {
         context.setFillColor(backgroundColor.cgColor)
         context.setStrokeColor(UIColor.clear.cgColor)
         
-        let originPt:Float = map(Float(circleSize.width),
-                                 inMin: Float(thumbMinSize),
-                                 inMax: Float(thumbMaxSize),
-                                 outMin: Float(thumbMinSize),
-                                 outMax: 0.0)
+        let originPt:CGFloat = Util.map(circleSize.width,
+                                        inMin: thumbMinSize,
+                                        inMax: thumbMaxSize,
+                                        outMin: thumbMinSize,
+                                        outMax: 0.0)
         
-        let origin:CGPoint = CGPoint(x: CGFloat(originPt), y: CGFloat(originPt))
+        let origin:CGPoint = CGPoint(x: originPt, y: originPt)
         
         let bounds = CGRect(origin: origin, size: circleSize)
         context.addEllipse(in: bounds)
@@ -293,21 +351,5 @@ class GradientSlider: UISlider {
         UIGraphicsEndImageContext()
         
         return image
-    }
-    
-    /**
-     * UTILITY FUNCTIONS
-     * These can probably move somewhere else for re-usability
-     * These can also be made static.
-     */
-    
-    // this performs a mapping between the slider values into a normalized
-    // range suitable for mapping the gradient
-    private func map(_ x:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float) -> Float {
-        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
-    }
-    
-    private func clamp(_ x:CGFloat, minValue:CGFloat, maxValue:CGFloat) -> CGFloat {
-        return min(max(x, minValue), maxValue)
     }
 }

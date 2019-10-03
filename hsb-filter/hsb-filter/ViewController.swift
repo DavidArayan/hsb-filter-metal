@@ -118,40 +118,29 @@ class ViewController: UIViewController, MTKViewDelegate {
             
             let inputImage = CIImage(mtlTexture: sourceTexture)!
             
-            // this is structly not needed however its nice to confirm that
-            // non HSB rendering image matches default HSB values
-            if (renderStatus == .enabled) {
-               // process brightness filter
-               brightnessFilter.setValue(inputImage, forKey: kCIInputImageKey)
-               brightnessFilter.setValue(brightnessSlider.value as NSNumber, forKey: kCIInputBrightnessKey)
-               
-               let brightnessOutput = brightnessFilter.outputImage!
-               
-               // process saturation filter
-               saturationFilter.setValue(brightnessOutput, forKey: kCIInputImageKey)
-               saturationFilter.setValue(saturationSlider.value as NSNumber, forKey: kCIInputSaturationKey)
-               
-               let saturationOutput = saturationFilter.outputImage!
-               
-               // process the hue filter
-               hueFilter.setValue(saturationOutput, forKey: kCIInputImageKey)
-               hueFilter.setValue(hueSlider.value as NSNumber, forKey: "inputAngle")
-               
-               let hueOutput = hueFilter.outputImage!
-    
-               context.render(hueOutput,
-                              to: currentDrawable.texture,
-                              commandBuffer: commandBuffer,
-                              bounds: inputImage.extent,
-                              colorSpace: colorSpace)
-            }
-            else {
-                context.render(inputImage,
-                               to: currentDrawable.texture,
-                               commandBuffer: commandBuffer,
-                               bounds: inputImage.extent,
-                               colorSpace: colorSpace)
-            }
+            // process brightness filter
+            brightnessFilter.setValue(inputImage, forKey: kCIInputImageKey)
+            brightnessFilter.setValue(brightnessSlider.value as NSNumber, forKey: kCIInputBrightnessKey)
+
+            let brightnessOutput = brightnessFilter.outputImage!
+
+            // process saturation filter
+            saturationFilter.setValue(brightnessOutput, forKey: kCIInputImageKey)
+            saturationFilter.setValue(saturationSlider.value as NSNumber, forKey: kCIInputSaturationKey)
+
+            let saturationOutput = saturationFilter.outputImage!
+
+            // process the hue filter
+            hueFilter.setValue(saturationOutput, forKey: kCIInputImageKey)
+            hueFilter.setValue(hueSlider.value as NSNumber, forKey: "inputAngle")
+
+            let hueOutput = hueFilter.outputImage!
+
+            context.render(hueOutput,
+                          to: currentDrawable.texture,
+                          commandBuffer: commandBuffer,
+                          bounds: inputImage.extent,
+                          colorSpace: colorSpace)
             
             commandBuffer.present(currentDrawable)
             commandBuffer.commit()
@@ -185,9 +174,9 @@ class ViewController: UIViewController, MTKViewDelegate {
     var tempBrightnessValue:Float = 0.0
     
     fileprivate func resetHSB() {
-        hueSlider.setAnimatedValue(0.0)
-        saturationSlider.setAnimatedValue(1.0)
-        brightnessSlider.setAnimatedValue(0.0)
+        self.hueSlider.setAnimatedValue(0.0)
+        self.saturationSlider.setAnimatedValue(1.0)
+        self.brightnessSlider.setAnimatedValue(0.0)
     }
     
     fileprivate func enableHSB() {
@@ -207,9 +196,9 @@ class ViewController: UIViewController, MTKViewDelegate {
         if (renderStatus == .enabled) {
             renderStatus = .disabled
             
-            tempHueValue = hueSlider.value
-            tempSaturationValue = saturationSlider.value
-            tempBrightnessValue = brightnessSlider.value
+            tempHueValue = hueSlider.realValue
+            tempSaturationValue = saturationSlider.realValue
+            tempBrightnessValue = brightnessSlider.realValue
             
             hueSlider.setAnimatedValue(0.0)
             saturationSlider.setAnimatedValue(1.0)
