@@ -34,7 +34,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue, Saturation, Brightness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7u-Re-jzv">
-                                            <rect key="frame" x="597" y="2" width="172.5" height="17"/>
+                                            <rect key="frame" x="593.5" y="2" width="179.5" height="17"/>
                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                             <color key="textColor" name="Brightness 100"/>
                                             <nil key="highlightedColor"/>
@@ -67,7 +67,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alp-T0-shU">
                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="41.5"/>
-                                                <color key="backgroundColor" name="Disabled Button Color"/>
+                                                <color key="backgroundColor" name="Active Button Color"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
                                                 <state key="normal" title="Reset">
                                                     <color key="titleColor" name="Active Text Color"/>
@@ -113,58 +113,88 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0v-SS-k1g" userLabel="Sliders">
-                                        <rect key="frame" x="358" y="0.0" width="650" height="186"/>
+                                        <rect key="frame" x="358" y="0.0" width="650" height="181"/>
                                         <subviews>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-3.1400000000000001" maxValue="3.1400000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Hue Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="28" width="614" height="31"/>
-                                                <color key="thumbTintColor" name="Hue 50"/>
-                                            </slider>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Saturation Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="78" width="614" height="31"/>
-                                                <color key="thumbTintColor" name="Saturation 50"/>
-                                            </slider>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Brightness Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="128" width="614" height="31"/>
-                                                <color key="thumbTintColor" name="Brightness 50"/>
-                                            </slider>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="W1L-Hc-z9O" userLabel="Hue Label">
-                                                <rect key="frame" x="650" y="33.5" width="29" height="19"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                <color key="textColor" name="Active Text Color"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Saturation Label">
-                                                <rect key="frame" x="650" y="83.5" width="73.5" height="19"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                <color key="textColor" name="Active Text Color"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Brightness Label">
-                                                <rect key="frame" x="650" y="133.5" width="76.5" height="19"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                <color key="textColor" name="Active Text Color"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9C-Vy-m85" userLabel="Brightness">
+                                                <rect key="frame" x="0.0" y="120.5" width="650" height="40.5"/>
+                                                <subviews>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8At-WI-jJA" userLabel="Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
+                                                        <rect key="frame" x="-2" y="5" width="634" height="31"/>
+                                                        <color key="thumbTintColor" name="Brightness 50"/>
+                                                    </slider>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="xsr-s2-eft" userLabel="Label">
+                                                        <rect key="frame" x="650" y="10.5" width="74.5" height="19"/>
+                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                        <color key="textColor" name="Active Text Color"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="xsr-s2-eft" firstAttribute="leading" secondItem="p9C-Vy-m85" secondAttribute="trailing" id="1Pq-Bd-A5y"/>
+                                                    <constraint firstItem="8At-WI-jJA" firstAttribute="centerY" secondItem="p9C-Vy-m85" secondAttribute="centerY" id="3LX-JC-c1W"/>
+                                                    <constraint firstItem="8At-WI-jJA" firstAttribute="trailing" secondItem="xsr-s2-eft" secondAttribute="leading" constant="-20" id="lqT-8d-MmK"/>
+                                                    <constraint firstItem="xsr-s2-eft" firstAttribute="centerY" secondItem="p9C-Vy-m85" secondAttribute="centerY" id="wRO-D5-hGP"/>
+                                                    <constraint firstItem="8At-WI-jJA" firstAttribute="leading" secondItem="p9C-Vy-m85" secondAttribute="leading" id="xBv-Ps-c4V"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leo-nd-B8Z" userLabel="Hue">
+                                                <rect key="frame" x="0.0" y="20" width="650" height="40.5"/>
+                                                <subviews>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-3.1400000000000001" maxValue="3.1400000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="dRj-4B-aqP" userLabel="Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
+                                                        <rect key="frame" x="-2" y="5" width="634" height="31"/>
+                                                        <color key="thumbTintColor" name="Hue 50"/>
+                                                    </slider>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="W1L-Hc-z9O" userLabel="Label">
+                                                        <rect key="frame" x="650" y="10.5" width="29" height="19"/>
+                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                        <color key="textColor" name="Active Text Color"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="W1L-Hc-z9O" firstAttribute="centerY" secondItem="leo-nd-B8Z" secondAttribute="centerY" id="5mQ-fT-yzQ"/>
+                                                    <constraint firstItem="dRj-4B-aqP" firstAttribute="centerY" secondItem="leo-nd-B8Z" secondAttribute="centerY" id="bt5-Oc-gVW"/>
+                                                    <constraint firstItem="W1L-Hc-z9O" firstAttribute="leading" secondItem="leo-nd-B8Z" secondAttribute="trailing" id="jFZ-PX-CiY"/>
+                                                    <constraint firstItem="dRj-4B-aqP" firstAttribute="leading" secondItem="leo-nd-B8Z" secondAttribute="leading" id="pJl-W4-SAq"/>
+                                                    <constraint firstItem="dRj-4B-aqP" firstAttribute="trailing" secondItem="W1L-Hc-z9O" secondAttribute="leading" constant="-20" id="wL3-Wq-VbY"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gY-9E-noI" userLabel="Saturation">
+                                                <rect key="frame" x="0.0" y="80.5" width="650" height="20"/>
+                                                <subviews>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="jQc-Xi-uc9" userLabel="Slider" customClass="GradientSlider" customModule="HSB_Filter_Demo" customModuleProvider="target">
+                                                        <rect key="frame" x="-2" y="-5" width="634" height="31"/>
+                                                        <color key="thumbTintColor" name="Saturation 50"/>
+                                                    </slider>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="38" translatesAutoresizingMaskIntoConstraints="NO" id="pRG-nj-3IN" userLabel="Label">
+                                                        <rect key="frame" x="650" y="0.5" width="71" height="19"/>
+                                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                        <color key="textColor" name="Active Text Color"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="pRG-nj-3IN" firstAttribute="centerY" secondItem="2gY-9E-noI" secondAttribute="centerY" id="2ja-F4-QSl"/>
+                                                    <constraint firstAttribute="height" constant="20" id="73G-rC-wvS"/>
+                                                    <constraint firstItem="pRG-nj-3IN" firstAttribute="leading" secondItem="2gY-9E-noI" secondAttribute="trailing" id="T0w-jc-4fr"/>
+                                                    <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerY" secondItem="2gY-9E-noI" secondAttribute="centerY" id="aC9-iB-cd2"/>
+                                                    <constraint firstItem="jQc-Xi-uc9" firstAttribute="trailing" secondItem="pRG-nj-3IN" secondAttribute="leading" constant="-20" id="hO2-5v-cBl"/>
+                                                    <constraint firstItem="jQc-Xi-uc9" firstAttribute="leading" secondItem="2gY-9E-noI" secondAttribute="leading" id="mpd-zs-c8x"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="W1L-Hc-z9O" firstAttribute="leading" secondItem="dRj-4B-aqP" secondAttribute="trailing" constant="20" id="2vk-Vs-8FP"/>
-                                            <constraint firstItem="jQc-Xi-uc9" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="9Pi-Ue-W8o"/>
-                                            <constraint firstItem="xsr-s2-eft" firstAttribute="leading" secondItem="8At-WI-jJA" secondAttribute="trailing" constant="20" id="A25-PX-Oy5"/>
-                                            <constraint firstItem="8At-WI-jJA" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="ANU-De-RcA"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pRG-nj-3IN" secondAttribute="trailing" constant="-75.5" id="IEb-ch-a1O"/>
-                                            <constraint firstItem="dRj-4B-aqP" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="JPh-Tt-ghb"/>
-                                            <constraint firstItem="pRG-nj-3IN" firstAttribute="centerY" secondItem="jQc-Xi-uc9" secondAttribute="centerY" id="MXc-mb-4NA"/>
-                                            <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="NZH-xc-4bl"/>
-                                            <constraint firstItem="8At-WI-jJA" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="Prv-Vh-uWE"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xsr-s2-eft" secondAttribute="trailing" constant="-79" id="Q8N-0e-JKa"/>
-                                            <constraint firstItem="W1L-Hc-z9O" firstAttribute="centerY" secondItem="dRj-4B-aqP" secondAttribute="centerY" id="SEm-rK-zya"/>
-                                            <constraint firstItem="xsr-s2-eft" firstAttribute="centerY" secondItem="8At-WI-jJA" secondAttribute="centerY" id="SyM-rd-naX"/>
-                                            <constraint firstItem="dRj-4B-aqP" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" constant="-40" id="ZuG-Gt-FVd"/>
-                                            <constraint firstItem="pRG-nj-3IN" firstAttribute="leading" secondItem="jQc-Xi-uc9" secondAttribute="trailing" constant="20" id="dBr-kj-Xke"/>
-                                            <constraint firstItem="dRj-4B-aqP" firstAttribute="bottom" secondItem="jQc-Xi-uc9" secondAttribute="top" constant="-20" id="hem-Pn-dNS"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W1L-Hc-z9O" secondAttribute="trailing" constant="-30.5" id="hn3-0s-fdj"/>
-                                            <constraint firstItem="8At-WI-jJA" firstAttribute="top" secondItem="jQc-Xi-uc9" secondAttribute="bottom" constant="20" id="kkD-O5-zdD"/>
-                                            <constraint firstItem="jQc-Xi-uc9" firstAttribute="centerY" secondItem="m0v-SS-k1g" secondAttribute="centerY" id="tEz-IN-Yae"/>
+                                            <constraint firstItem="leo-nd-B8Z" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="0cL-L6-JRu"/>
+                                            <constraint firstItem="leo-nd-B8Z" firstAttribute="bottom" secondItem="2gY-9E-noI" secondAttribute="top" constant="-20" id="4a1-B3-f8w"/>
+                                            <constraint firstItem="p9C-Vy-m85" firstAttribute="top" secondItem="2gY-9E-noI" secondAttribute="bottom" constant="20" id="68G-V1-LFY"/>
+                                            <constraint firstItem="p9C-Vy-m85" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" id="NxH-Dv-PxG"/>
+                                            <constraint firstItem="2gY-9E-noI" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="Q8l-gS-KXB"/>
+                                            <constraint firstItem="2gY-9E-noI" firstAttribute="centerY" secondItem="m0v-SS-k1g" secondAttribute="centerY" id="Xqy-JY-5A6"/>
+                                            <constraint firstItem="2gY-9E-noI" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" id="YWA-pt-ql7"/>
+                                            <constraint firstItem="leo-nd-B8Z" firstAttribute="top" secondItem="m0v-SS-k1g" secondAttribute="top" constant="20" id="hrl-7s-YsS"/>
+                                            <constraint firstAttribute="bottom" secondItem="p9C-Vy-m85" secondAttribute="bottom" constant="20" id="pon-65-kjr"/>
+                                            <constraint firstItem="leo-nd-B8Z" firstAttribute="width" secondItem="m0v-SS-k1g" secondAttribute="width" id="sfy-3e-prl"/>
+                                            <constraint firstItem="p9C-Vy-m85" firstAttribute="centerX" secondItem="m0v-SS-k1g" secondAttribute="centerX" id="yLj-Pd-G3O"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -179,7 +209,7 @@
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="eRi-hL-uUK"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="top" secondItem="Ma0-pt-Nn4" secondAttribute="top" id="giQ-Tv-aWP"/>
                                     <constraint firstItem="6gs-7k-7JU" firstAttribute="leading" secondItem="Ma0-pt-Nn4" secondAttribute="leading" id="jcU-NG-y7r"/>
-                                    <constraint firstItem="m0v-SS-k1g" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" id="qlV-BT-jiv"/>
+                                    <constraint firstItem="m0v-SS-k1g" firstAttribute="bottom" secondItem="Ma0-pt-Nn4" secondAttribute="bottom" constant="-5" id="qlV-BT-jiv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -223,9 +253,6 @@
         </namedColor>
         <namedColor name="Brightness 50">
             <color red="0.50199997425079346" green="0.49799999594688416" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Disabled Button Color">
-            <color red="0.16470588235294117" green="0.16470588235294117" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Hue 50">
             <color red="0.45899999141693115" green="0.98400002717971802" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
