@@ -285,13 +285,13 @@ class GradientSlider: UISlider {
         
         // this is the actual size of the thumb
         // based on the size of the current thumb
-        let minNewTrack:CGFloat = minTrack - trackFactor
-        let maxNewTrack:CGFloat = maxTrack + trackFactor
+        // let minNewTrack:CGFloat = minTrack - trackFactor
+        // let maxNewTrack:CGFloat = maxTrack + trackFactor
         
         // NOTE: Uncomment to have the track go all the way instead of locking
         // inside the track. With the current implementation it felt quite odd during use
-        // let minNewTrack:CGFloat = minTrack - trackFactor - (currentThumbSize / 2.0)
-        // let maxNewTrack:CGFloat = maxTrack + trackFactor + (currentThumbSize / 2.0)
+        let minNewTrack:CGFloat = minTrack - trackFactor - (currentThumbSize / 2.0)
+        let maxNewTrack:CGFloat = maxTrack + trackFactor + (currentThumbSize / 2.0)
         
         let currentValue:CGFloat = currentBounds.origin.x
         
