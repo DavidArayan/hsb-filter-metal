@@ -123,10 +123,10 @@ extension Array where Element == GradientValue {
         let cgSpanTime:CGFloat = CGFloat(spanTime)
         
         // this could be SIMD accelerated for performance
-        let lerpR:CGFloat = Util.lerp(a: colorA.red, b: colorB.red, t: cgSpanTime)
-        let lerpG:CGFloat = Util.lerp(a: colorA.green, b: colorB.green, t: cgSpanTime)
-        let lerpB:CGFloat = Util.lerp(a: colorA.blue, b: colorB.blue, t: cgSpanTime)
-        let lerpA:CGFloat = Util.lerp(a: colorA.alpha, b: colorB.alpha, t: cgSpanTime)
+        let lerpR:CGFloat = Util.lerp(colorA.red, b: colorB.red, t: cgSpanTime)
+        let lerpG:CGFloat = Util.lerp(colorA.green, b: colorB.green, t: cgSpanTime)
+        let lerpB:CGFloat = Util.lerp(colorA.blue, b: colorB.blue, t: cgSpanTime)
+        let lerpA:CGFloat = Util.lerp(colorA.alpha, b: colorB.alpha, t: cgSpanTime)
         
         // create and return our generated/lerped UIColor
         return UIColor(red: lerpR, green: lerpG, blue: lerpB, alpha: lerpA)

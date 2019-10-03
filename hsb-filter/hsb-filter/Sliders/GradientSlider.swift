@@ -44,7 +44,7 @@ class GradientSlider: UISlider {
     
     // this is the track translation animation factors. Using normal animation
     // frameworks did not work well, so implemented my own.
-    let trackAnimationTimeFactor:CGFloat = 0.1
+    let trackAnimationTimeFactor:CGFloat = 0.08
     var trackAnimationTime:CGFloat = 0.0
     var startValue:CGFloat = 0.0
     var targetValue:CGFloat = 0.0
@@ -135,7 +135,7 @@ class GradientSlider: UISlider {
         
         switch trackAnimationState {
         case .animating:
-            let currentValue:CGFloat = Util.lerp(a: self.startValue,
+            let currentValue:CGFloat = Util.curve(self.startValue,
                                                  b: self.targetValue,
                                                  t: self.trackAnimationTime)
             
